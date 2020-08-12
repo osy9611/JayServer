@@ -47,10 +47,12 @@ void ServerSession::SetBuffer()
 	memset(&m_SendBuffer, 0, sizeof(Buffer));
 }
 
-bool ServerSession::SendPacket()
+bool ServerSession::SendPacket(const char* data,int size)
 {
 	CriticalSectionLock lock(m_csSock);
 
+	m_SendBuffer.wsaBuf.len = size;
+	m_SendBuffer.wsaBuf.buf = (char*)data;
 	DWORD dwRecvNumBytes = 0;
 
 	//SendPacket
@@ -90,7 +92,6 @@ bool ServerSession::RecvPacket()
 		std::cout << "Recv ¿¡·¯" << std::endl;
 		return true;
 	}
-
 	return true;
 }
 

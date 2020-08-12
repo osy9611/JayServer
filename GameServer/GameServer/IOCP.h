@@ -53,5 +53,7 @@ private:
 
 	std::vector<ServerSession*> m_SessionList;	//유저 배열
 	std::deque<int> m_SessionQueue;
+
+	CriticalSection m_csSockObj;
 };
 

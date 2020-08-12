@@ -7,7 +7,7 @@ public:
 
 	bool InitSocket();
 
-	bool SendPacket();
+	bool SendPacket(const char * data,int size);
 	bool RecvPacket();
 
 	void CloseSocket();

@@ -59,9 +59,9 @@ public:
 	~InputMemoryStream() { if (mIsOwner) std::free(mBuffer); }
 
 	const char* GetBufferPtr() const { return mBuffer; }
-	int GetRemainingBitCount() const { return mCapacity - mHead; }
+	int GetRemainingDataCount() const { return mCapacity - mHead; }
 
-	void ResetToCapacity(int inDataCapacity) { inDataCapacity = inDataCapacity; mHead = 0; }
+	void ResetToCapacity(int inDataCapacity) { mCapacity = inDataCapacity; mHead = 0; }
 
 	template<typename T>
 	void Read(T& inData, int inDataCount = sizeof(T))
@@ -70,7 +70,7 @@ public:
 			std::is_enum<T>::value,
 			"일반 읽기는 기본 데이터 유형 만 지원합니다");
 
-		inData = (*(T)(mBuffer + mDataHead));
+		inData = (*(T*)(mBuffer + mHead));
 		mHead += inDataCount;
 	}
 

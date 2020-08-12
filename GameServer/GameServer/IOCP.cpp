@@ -180,19 +180,23 @@ void IOCP:: AcceptThread()
 
 		m_SessionList[SessionID]->SetBuffer();
 
-		HANDLE hIOCP;
-
-		hIOCP = CreateIoCompletionPort((HANDLE)m_SessionList[SessionID]->m_Socket,
-			m_hIOCP,
-			reinterpret_cast<DWORD>(m_SessionList[SessionID]),
-			0);
-
-		if (hIOCP == NULL || m_hIOCP != hIOCP)
+		//소켓을 CreateIoCompletionPort에 넣는다 간섭을 받지않기 위하여 CriticalSection을 건다
+		CSLOCK(m_csSockObj)
 		{
-			std::cout << "IOCP 연결 에러!!" << std::endl;
-			return;
-		}
+			HANDLE hIOCP;
 
+			hIOCP = CreateIoCompletionPort((HANDLE)m_SessionList[SessionID]->m_Socket,
+				m_hIOCP,
+				reinterpret_cast<DWORD>(m_SessionList[SessionID]),
+				0);
+
+			if (hIOCP == NULL || m_hIOCP != hIOCP)
+			{
+				std::cout << "IOCP 연결 에러!!" << std::endl;
+				return;
+			}
+		}
+		
 		bool ret = m_SessionList[SessionID]->RecvPacket();
 		if (ret == false)
 		{
@@ -242,8 +246,11 @@ void IOCP::WorkThread()
 		case SEND:
 			break;
 		case RECV:
+
+			pServerSession->SendPacket(pBuffer->cBuffer, ioSize);
 			//데이터를 받을 거임
 			pServerSession->RecvPacket();
+		
 			break;
 		}
 		

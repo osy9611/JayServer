@@ -52,7 +52,9 @@
     <UnityVersion>2020.1.1f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\NewBehaviourScript.cs" />
+    <Compile Include="Assets\TestStream.cs" />
+    <Compile Include="Assets\MemoryStream.cs" />
+    <Compile Include="Assets\NetWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
