@@ -10,15 +10,20 @@
 #include<atltime.h>
 #include<vector>
 #include<deque>
+#include<queue>
 #include<string>
 #pragma comment(lib, "ws2_32.lib")
 
 #include"CriticalSection.h"
+#include "GlobalSingleton.h"
+
+
+#include "MemoryStream.h"
+#include "PacketProc.h"
 
 #include"IOCP.h"
 #include"ServerSession.h"
 
-#include "MemoryStream.h"
 
 #ifndef CONCATENATE
 #define CONCATENATE( arg1, arg2 )   _CONCATENATE1( arg1, arg2 )

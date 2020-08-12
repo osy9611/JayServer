@@ -53,8 +53,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\TestStream.cs" />
-    <Compile Include="Assets\MemoryStream.cs" />
     <Compile Include="Assets\NetWork.cs" />
+    <Compile Include="Assets\MemoryStream.cs" />
+    <Compile Include="Assets\Resolve.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

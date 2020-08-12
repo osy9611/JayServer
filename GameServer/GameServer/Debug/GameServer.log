@@ -1,5 +1,7 @@
 ﻿  IOCP.cpp
 d:\iocpserver\gameserver\gameserver\stdafx.h(2): warning C4068: 알 수 없는 pragma입니다.
+  PacketProc.cpp
+d:\iocpserver\gameserver\gameserver\stdafx.h(2): warning C4068: 알 수 없는 pragma입니다.
   ServerSession.cpp
 d:\iocpserver\gameserver\gameserver\stdafx.h(2): warning C4068: 알 수 없는 pragma입니다.
   코드를 생성하고 있습니다...

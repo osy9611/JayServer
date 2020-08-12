@@ -246,8 +246,8 @@ void IOCP::WorkThread()
 		case SEND:
 			break;
 		case RECV:
-
-			pServerSession->SendPacket(pBuffer->cBuffer, ioSize);
+			std::cout << "데이터 들어옴" << std::endl;
+			pServerSession->Handle_Receive(pBuffer->cBuffer, ioSize);
 			//데이터를 받을 거임
 			pServerSession->RecvPacket();
 		

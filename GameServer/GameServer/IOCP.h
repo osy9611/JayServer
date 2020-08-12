@@ -20,7 +20,7 @@ struct Buffer :OVERLAPPED
 	BUFFER_STATE state;
 };
 
-class IOCP
+class IOCP : public GlobalSingleton<IOCP>
 {
 public:
 	IOCP();

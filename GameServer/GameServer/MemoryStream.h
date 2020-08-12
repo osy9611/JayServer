@@ -53,7 +53,7 @@ public:
 	InputMemoryStream(char* inBuffer, int inDataCount) :
 		mBuffer(inBuffer),
 		mCapacity(inDataCount),
-		mHead(0),
+		mHead(sizeof(short)),
 		mIsOwner(false){}
 
 	~InputMemoryStream() { if (mIsOwner) std::free(mBuffer); }

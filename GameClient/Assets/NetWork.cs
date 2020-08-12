@@ -24,6 +24,7 @@ public class NetWork : MonoBehaviour
     public string IP;
     public int Port;
 
+    private Resolve resolve;
     //비동기용 오브젝트
     public class AsyncObject
     {
@@ -41,8 +42,8 @@ public class NetWork : MonoBehaviour
     //AsyncCallback : 해당 비동기 작업을 완료할 때 호출되는 메서드를 참조
     private AsyncCallback m_fnReceiveHandler;
     private AsyncCallback m_fnSendHandler;
+    
 
-    // Start is called before the first frame update
     void Awake()
     {
         if(instance == null)
@@ -58,6 +59,7 @@ public class NetWork : MonoBehaviour
         //비동기 작업 매서드를 초기화
         m_fnReceiveHandler = new AsyncCallback(handleDataReceive);
         m_fnSendHandler = new AsyncCallback(handleDataSend);
+        resolve = new Resolve();
 
         Connect();
     }
@@ -123,8 +125,16 @@ public class NetWork : MonoBehaviour
         //추가 정보를 넘기기 위한 변수 선언
         AsyncObject ao = new AsyncObject(1);
 
-        byte[] packet = new byte[os.GetDataLength()];
-        Array.Copy(os.GetBuffer(), 0, packet, 0, os.GetDataLength());
+        //OutputMemoryStream 사이즈 + short
+        byte[] Header = BitConverter.GetBytes((short)(os.GetDataLength() + sizeof(short)));
+
+        //OutputMemoryStream 사이즈와 short 2바이트 크기를 잡아서 할당
+        byte[] packet = new byte[os.GetDataLength()+Header.Length];
+
+        //해더 + OutputMemoryStream
+        Array.Copy(Header, 0,packet, 0, Header.Length);
+        Array.Copy(os.GetBuffer(), 0, packet, Header.Length, os.GetDataLength());
+
         ao.Buffer = packet;
         ao.WorkingSocket = m_ClientSocket;
 
@@ -144,13 +154,12 @@ public class NetWork : MonoBehaviour
     //IAsyncResult : 비동기 작업의 상태를 나타내는 인터페이스
     private void handleDataReceive(IAsyncResult ar)
     {
-        Debug.Log("데이터 들어옴");
         //넘겨진 추가 정보를 가져온다
         //AsyncState 속성의 자료형은 Object 형식이기 때문에 형 변환이 필요
         AsyncObject ao = (AsyncObject)ar.AsyncState;
 
         //받은 바이트 수 저장할 변수 선언
-        int recvByte;
+        int recvByte = 0;
 
         try
         {
@@ -171,13 +180,7 @@ public class NetWork : MonoBehaviour
 
             Array.Copy(ao.Buffer, msgByte, recvByte);
 
-            InputMemoryStream io = new InputMemoryStream(msgByte, msgByte.Length);
-
-            string Name = "";
-            int Level = 0;
-            io.Read(ref Name);
-            io.Read(ref Level);
-            Debug.Log("이름 : " + Name + " 레벨 : " + Level);
+            resolve.ReadMessage(msgByte, recvByte);            
         }
 
         try

@@ -62,7 +62,7 @@ public class InputMemoryStream
 {
     private byte[] mBuffer;
     private int mCapapcity;
-    private int mHead = 0;
+    private int mHead = Defines.HEADERSIZE;
     
     public InputMemoryStream(byte[] inBuffer,int inDataCount)
     {

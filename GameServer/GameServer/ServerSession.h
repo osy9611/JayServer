@@ -1,4 +1,12 @@
 #pragma once
+#define MAX_RECEIVE_BUFFER_LEN 1024
+
+
+struct PacketHeader
+{
+	short size;
+};
+
 class ServerSession
 {
 public:
@@ -8,7 +16,9 @@ public:
 	bool InitSocket();
 
 	bool SendPacket(const char * data,int size);
+
 	bool RecvPacket();
+	void Handle_Receive(const char* data, int size);
 
 	void CloseSocket();
 
@@ -16,13 +26,15 @@ public:
 
 	int GetSessionID() { return m_index; }
 public:
-	SOCKET		m_Socket;
+	SOCKET				m_Socket;
 
-	Buffer		m_RecvBuffer;
-	Buffer		m_SendBuffer;
+	Buffer				m_RecvBuffer;
+	Buffer				m_SendBuffer;
 private:
-	int m_index;
+	int					m_index;
 
-	CriticalSection m_csSock;
+	int					mPacketBufferMark =0;
+	char				mPacketBuffer[MAX_RECEIVE_BUFFER_LEN * 2];
+	CriticalSection		m_csSock;
 };
 
