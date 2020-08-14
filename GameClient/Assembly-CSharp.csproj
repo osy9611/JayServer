@@ -52,10 +52,12 @@
     <UnityVersion>2020.1.1f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\NetWork\Resolve.cs" />
     <Compile Include="Assets\TestStream.cs" />
-    <Compile Include="Assets\NetWork.cs" />
-    <Compile Include="Assets\MemoryStream.cs" />
-    <Compile Include="Assets\Resolve.cs" />
+    <Compile Include="Assets\Script\NetWork\NetWork.cs" />
+    <Compile Include="Assets\Script\NetWork\MemoryStream.cs" />
+    <Compile Include="Assets\Script\Monster\Monster.cs" />
+    <Compile Include="Assets\Script\Monster\MonsterManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

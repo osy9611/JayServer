@@ -81,11 +81,13 @@ public class Resolve
         switch (type)
         {
             case 1500:
-                string Name = "";
-                inInputStream.Read(ref Name);
-                int Level = 0;
-                inInputStream.Read(ref Level);
-                Debug.Log("이름 : " + Name + " 레벨 : " + Level);
+                int _id = 0;
+                float x = 0, y = 0, z = 0;
+                inInputStream.Read(ref _id);
+                inInputStream.Read(ref x);
+                inInputStream.Read(ref y);
+                inInputStream.Read(ref z);
+                MonsterManager.instance.SearchMonster(_id, new Vector3(x,y,z));
                 break;
         }
 

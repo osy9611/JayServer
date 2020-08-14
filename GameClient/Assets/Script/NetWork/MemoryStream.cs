@@ -95,6 +95,13 @@ public class InputMemoryStream
         Debug.Log(mHead);
     }
 
+    public void Read (ref Vector3 inData)
+    {
+        Read(ref inData.x);
+        Read(ref inData.y);
+        Read(ref inData.z);
+    }
+
     public void Read(ref string inString)
     {
         short elementCount = 0;

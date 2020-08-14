@@ -33,6 +33,8 @@ public:
 	void WorkThread();
 
 	bool Initialize();
+
+	void SendAllPlayer(const char* data, int size);
 private:
 	void CloseSession(const int nSessionID);
 
@@ -57,3 +59,4 @@ private:
 	CriticalSection m_csSockObj;
 };
 
+#define _IOCP IOCP::Singleton()

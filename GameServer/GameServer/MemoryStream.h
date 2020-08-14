@@ -39,6 +39,8 @@ public:
 			Write(element);
 		}
 	}
+
+	void Write(Vector3 data);
 private:
 	void ReallocBuffer(int inNewDataLength);
 

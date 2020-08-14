@@ -17,3 +17,10 @@ void OutputMemoryStream::ReallocBuffer(int inNewDataLength)
 
 	mCapacity = inNewDataLength;
 }
+
+void OutputMemoryStream::Write(Vector3 Pos)
+{
+	Write(Pos.mX);
+	Write(Pos.mY);
+	Write(Pos.mZ);
+}

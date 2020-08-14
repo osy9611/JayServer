@@ -257,6 +257,17 @@ void IOCP::WorkThread()
 	}
 }
 
+void IOCP::SendAllPlayer(const char* data, int size)
+{
+	for (int i = 0; i < m_SessionList.size(); ++i)
+	{
+		if (m_SessionList[i]->m_Socket != INVALID_SOCKET)
+		{
+			m_SessionList[i]->SendPacket(data, size);
+		}
+	}
+}
+
 void IOCP::CloseSession(int nSessionID)
 {
 	std::cout << "클라이언트 종료 : " << nSessionID << std::endl;

@@ -6,17 +6,27 @@
 #include<WS2tcpip.h>
 #include<Windows.h>
 #include<cassert>
+
+#include"memory.h"
 #include<iostream>
 #include<atltime.h>
 #include<vector>
 #include<deque>
 #include<queue>
 #include<string>
+#include<conio.h>
+#include<sysinfoapi.h>
+#include"cassert"
+#include"unordered_set"
+#include"unordered_map"
+
 #pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib,"winmm.lib")
+
+#include "Math.h"
 
 #include"CriticalSection.h"
 #include "GlobalSingleton.h"
-
 
 #include "MemoryStream.h"
 #include "PacketProc.h"
@@ -24,6 +34,9 @@
 #include"IOCP.h"
 #include"ServerSession.h"
 
+#include"GameObject.h"
+#include"FrameManager.h"
+#include "Monster.h"
 
 #ifndef CONCATENATE
 #define CONCATENATE( arg1, arg2 )   _CONCATENATE1( arg1, arg2 )
