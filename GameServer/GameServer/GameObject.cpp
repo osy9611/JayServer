@@ -7,5 +7,5 @@ GameObject::GameObject()
 
 Vector3 GameObject::GetForwardVector()
 {
-	return Vector3(sinf(rotation), -cosf(rotation), 0.f);
+	return Vector3(sinf(rotation), 0.f, -cosf(rotation));
 }

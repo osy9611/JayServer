@@ -19,24 +19,31 @@
 #include"cassert"
 #include"unordered_set"
 #include"unordered_map"
+#include<random>
 
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib,"winmm.lib")
 
-#include "Math.h"
+class GameObject;
+class MonsterManager;
+
+#include"Math.h"
 
 #include"CriticalSection.h"
-#include "GlobalSingleton.h"
+#include"GlobalSingleton.h"
 
-#include "MemoryStream.h"
-#include "PacketProc.h"
+#include"MemoryStream.h"
+#include"PacketProc.h"
 
 #include"IOCP.h"
 #include"ServerSession.h"
 
+#include"GameObjectManager.h"
 #include"GameObject.h"
 #include"FrameManager.h"
-#include "Monster.h"
+
+#include"Monster.h"
+#include"MonsterManager.h"
 
 #ifndef CONCATENATE
 #define CONCATENATE( arg1, arg2 )   _CONCATENATE1( arg1, arg2 )

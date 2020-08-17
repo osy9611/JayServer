@@ -1,7 +1,7 @@
 #pragma once
 
 #define MAX_BUF_SIZE 1024
-#define PORTNUM 8085
+#define PORTNUM 8081
 #define MAX_CLIENT_COUNT 10
 #define MAX_WORKTHREAD 2
 
@@ -35,6 +35,8 @@ public:
 	bool Initialize();
 
 	void SendAllPlayer(const char* data, int size);
+
+	void SendPlayer(int nSessionID ,const char* data, int size);
 private:
 	void CloseSession(const int nSessionID);
 

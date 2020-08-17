@@ -2,13 +2,11 @@
 class Monster : public GameObject
 {
 public:
-	//Monster();
-	//~Monster();
-
-	void Update();
-
+	void Update(float dTime);
 	void CalcDamage(float Damage);
 
+	void Write(OutputMemoryStream &os);
+	void Read(InputMemoryStream& is) {}
 private:
 	float Speed;
 	float Hp;

@@ -92,7 +92,6 @@ public class InputMemoryStream
     {
         inData = BitConverter.ToSingle(mBuffer, mHead);
         mHead += sizeof(float);
-        Debug.Log(mHead);
     }
 
     public void Read (ref Vector3 inData)

@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -86,7 +86,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -99,7 +99,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -146,11 +146,13 @@
     <ClInclude Include="CriticalSection.h" />
     <ClInclude Include="FrameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GlobalSingleton.h" />
     <ClInclude Include="IOCP.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="MemoryStream.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterManager.h" />
     <ClInclude Include="PacketProc.h" />
     <ClInclude Include="ServerSession.h" />
     <ClInclude Include="stdafx.h" />
@@ -158,10 +160,12 @@
   <ItemGroup>
     <ClCompile Include="FrameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="IOCP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryStream.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MonsterManager.cpp" />
     <ClCompile Include="PacketProc.cpp" />
     <ClCompile Include="ServerSession.cpp" />
   </ItemGroup>

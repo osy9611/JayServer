@@ -6,7 +6,7 @@ class OutputMemoryStream
 {
 public:
 	OutputMemoryStream() :
-		mHead(0),
+		mHead(2),	//사이즈를 넣기위함 short의 크기는 2비트 이기 때문
 		mBuffer(nullptr)
 	{
 		ReallocBuffer(1500 * 8);
@@ -41,6 +41,8 @@ public:
 	}
 
 	void Write(Vector3 data);
+
+	void SetSize();
 private:
 	void ReallocBuffer(int inNewDataLength);
 

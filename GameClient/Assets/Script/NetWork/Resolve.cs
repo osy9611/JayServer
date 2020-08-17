@@ -55,7 +55,7 @@ public class Resolve
             if(size<=nPacketData) //일단 처리할 수 있는 만큼의 데이터가 있다면 패킷을 처리한다.
             {
                 InputMemoryStream io = new InputMemoryStream(msgByte, recvBytes);
-                CheckData(io);
+                CheckData(io,size);
                 nPacketData -= size;
                 nReadData += size;
             }
@@ -73,7 +73,7 @@ public class Resolve
         }
     }
 
-    void CheckData(InputMemoryStream inInputStream)
+    void CheckData(InputMemoryStream inInputStream,int size)
     {
         short type = 0;
         inInputStream.Read(ref type);
@@ -81,13 +81,16 @@ public class Resolve
         switch (type)
         {
             case 1500:
-                int _id = 0;
-                float x = 0, y = 0, z = 0;
-                inInputStream.Read(ref _id);
-                inInputStream.Read(ref x);
-                inInputStream.Read(ref y);
-                inInputStream.Read(ref z);
-                MonsterManager.instance.SearchMonster(_id, new Vector3(x,y,z));
+                MonsterManager.instance.SetMonster(inInputStream);
+                //int _id = 0;
+                //float x = 0, y = 0, z = 0, rot = 0;
+                //inInputStream.Read(ref _id);
+                //inInputStream.Read(ref x);
+                //inInputStream.Read(ref y);
+                //inInputStream.Read(ref z);
+                //inInputStream.Read(ref rot);
+                //Debug.Log("ID : " + _id + " x :" + x + " y : " + y + "z : " + z);
+                //MonsterManager.instance.SearchMonster(_id, new Vector3(x, y, z));
                 break;
         }
 

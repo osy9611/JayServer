@@ -4,9 +4,9 @@ class GameObject
 {
 public:
 	GameObject();
-	//virtual ~GameObject();
+	virtual ~GameObject() {}
 
-	//virtual void Update();
+	virtual void Update(float dTime) {}
 
 	virtual void HandleDying() {}
 
@@ -26,8 +26,8 @@ public:
 	int GetNetworkId()						const { return NetworkId; }
 	void SetNetworkID(int inNetworkId) { NetworkId = inNetworkId; }
 
-	//virtual int Write(OutputMemoryStream& inOutputStream) const { (void)inOutputStream; }
-	//virtual void Read(InputMemoryStream &inInputStream)			{ (void)inInputStream; }
+	virtual int Write(OutputMemoryStream& inOutputStream) const { (void)inOutputStream; return 0; }
+	virtual void Read(InputMemoryStream &inInputStream)			{ (void)inInputStream; }
 private:
 	Vector3 position;
 	Vector3 velocity;

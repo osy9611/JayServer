@@ -146,7 +146,7 @@ public class NetWork : MonoBehaviour
         }
         catch(Exception ex)
         {
-            Debug.Log("전송 중 오류발생");
+            Debug.Log("전송 중 오류발생" + ex);
         }
     }
 

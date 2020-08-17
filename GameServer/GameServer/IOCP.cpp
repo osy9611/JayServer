@@ -196,7 +196,7 @@ void IOCP:: AcceptThread()
 				return;
 			}
 		}
-		
+
 		bool ret = m_SessionList[SessionID]->RecvPacket();
 		if (ret == false)
 		{
@@ -266,6 +266,11 @@ void IOCP::SendAllPlayer(const char* data, int size)
 			m_SessionList[i]->SendPacket(data, size);
 		}
 	}
+}
+
+void IOCP::SendPlayer(int nSessionID,const char* data, int size)
+{
+	m_SessionList[nSessionID]->SendPacket(data, size);
 }
 
 void IOCP::CloseSession(int nSessionID)
