@@ -8,12 +8,10 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 	switch(type)
 	{
 	case USER_DATA:
-		std::string Name;
-		inInputStream.Read(Name);
-		int Level;
-		inInputStream.Read(Level);
-
-		std::cout << "이름 : " << Name << " 레벨 : " << Level << std::endl;
+		_GameObjectManager.UpdatePlayerManager(inInputStream);
+		break;
+	case USER_OUT:
+		_GameObjectManager.DeletePlayerManager(inInputStream);
 		break;
 	}
 }

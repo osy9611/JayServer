@@ -154,6 +154,8 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
     <ClInclude Include="PacketProc.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="ServerSession.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -167,6 +169,8 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterManager.cpp" />
     <ClCompile Include="PacketProc.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="ServerSession.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

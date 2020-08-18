@@ -35,8 +35,13 @@ float MonsterManager::RandomSet(float min, float max)
 
 void MonsterManager::Write(OutputMemoryStream& os)
 {
-	for (int i = 0; i < NORMAL_MONSTER_COUNT; ++i)
+	short monsterCount = GetMonsterCount();
+	os.Write(monsterCount);
+	if (monsterCount != 0)
 	{
-		monsterList[i]->Write(os);
+		for (int i = 0; i < NORMAL_MONSTER_COUNT; ++i)
+		{
+			monsterList[i]->Write(os);
+		}
 	}
 }

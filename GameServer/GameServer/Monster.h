@@ -7,6 +7,10 @@ public:
 
 	void Write(OutputMemoryStream &os);
 	void Read(InputMemoryStream& is) {}
+
+	float RandomSet(float min, float max);
+
+	void MapRangeCheck();
 private:
 	float Speed;
 	float Hp;

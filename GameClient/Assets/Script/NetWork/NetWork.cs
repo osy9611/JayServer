@@ -248,6 +248,10 @@ public class NetWork : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        OutputMemoryStream os = new OutputMemoryStream();
+        os.Write((short)Defines.USER_OUT);
+        os.Write(PlayerManager.instance.playerName);
+        Send(os);
         StopClient();
     }
 }

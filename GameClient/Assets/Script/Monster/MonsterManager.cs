@@ -31,26 +31,12 @@ public class MonsterManager : MonoBehaviour
     {
         if(IsSet)
         {
-            GameObject obj = Instantiate(Monster, _setPos, Quaternion.identity);
+            GameObject obj = Instantiate(this.Monster, _setPos, Quaternion.identity);
             obj.GetComponent<Monster>().SetId(_setId);
             IsSet = false;
         }
     }
-
-    public void SetMonster(InputMemoryStream inInputStream)
-    {
-        for (int i = 0; i < 6; ++i)
-        {
-            int _id = 0;
-            Vector3 _pos = new Vector3();
-            Vector3 _dir = new Vector3();
-            inInputStream.Read(ref _id);
-            inInputStream.Read(ref _pos);
-            inInputStream.Read(ref _dir);
-            SearchMonster(_id, _pos, _dir);
-        }
-    }
-
+    
     public void SetMonster(Monster _monster)
     {
         Monsters.Add(_monster.GetId(), _monster);

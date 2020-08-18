@@ -78,6 +78,13 @@ public:
 		mHead += inDataCount;
 	}
 
+	void Read(Vector3& _vector)
+	{
+		Read(_vector.mX);
+		Read(_vector.mY);
+		Read(_vector.mZ);
+	}
+
 	void Read(std::string& inString)
 	{
 		short elementCount;

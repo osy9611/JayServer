@@ -16,6 +16,7 @@ public class Defines
     public static readonly short HEADERSIZE = sizeof(short);    //헤더 사이즈
 
     public static readonly short USER_DATA = 1500;
+    public static readonly short USER_OUT = 1600;
 }
 public class Resolve
 {
@@ -81,16 +82,7 @@ public class Resolve
         switch (type)
         {
             case 1500:
-                MonsterManager.instance.SetMonster(inInputStream);
-                //int _id = 0;
-                //float x = 0, y = 0, z = 0, rot = 0;
-                //inInputStream.Read(ref _id);
-                //inInputStream.Read(ref x);
-                //inInputStream.Read(ref y);
-                //inInputStream.Read(ref z);
-                //inInputStream.Read(ref rot);
-                //Debug.Log("ID : " + _id + " x :" + x + " y : " + y + "z : " + z);
-                //MonsterManager.instance.SearchMonster(_id, new Vector3(x, y, z));
+                ObjectManager.instance.SetObject(inInputStream);
                 break;
         }
 

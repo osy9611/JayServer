@@ -56,6 +56,13 @@ public class OutputMemoryStream
         Buffer.BlockCopy(Encoding.UTF8.GetBytes(inString), 0, mBuffer, mHead, elementCount);
         mHead += elementCount;
     }
+
+    public void Write(Vector3 _pos)
+    {
+        Write(_pos.x);
+        Write(_pos.y);
+        Write(_pos.z);
+    }
 }
 
 public class InputMemoryStream

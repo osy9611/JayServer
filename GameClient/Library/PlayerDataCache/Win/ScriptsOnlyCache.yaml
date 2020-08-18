@@ -4,7 +4,9 @@ ScriptsOnlyBuild:
     - Monster
     - MonsterManager
     - NetWork
-    - TestStream
+    - ObjectManager
+    - Player
+    - PlayerManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.Graphs.dll:
@@ -50,11 +52,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 12436}
+      Script: {instanceID: 12566}
     - Class: 114
-      Script: {instanceID: 12568}
+      Script: {instanceID: 13356}
     - Class: 114
-      Script: {instanceID: 13358}
+      Script: {instanceID: 14006}
+    - Class: 114
+      Script: {instanceID: 14950}
+    - Class: 114
+      Script: {instanceID: 14962}
+    - Class: 114
+      Script: {instanceID: 14978}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 136
@@ -242,7 +250,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: b42beede44e77d9a92e775e21d4a9e4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MonsterManager
@@ -266,13 +274,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 1b14a1c480cfa5d940ed15f2f0ea9421
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TestStream
-  - hash:
-      serializedVersion: 2
-      Hash: b20b21003310253bfd38568ad3eeae5d
+      Hash: 3ba41fb2606cac43752efea1e8346503
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Monster
@@ -510,6 +512,24 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: ac2186452e59d33c61a1a3a1dd4dc04b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Player
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ObjectManager
+  - hash:
+      serializedVersion: 2
+      Hash: df03b981677d8b261ce7aacf76a7f566
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerManager
   platform: 5
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

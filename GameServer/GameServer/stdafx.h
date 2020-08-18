@@ -26,6 +26,7 @@
 
 class GameObject;
 class MonsterManager;
+class PlayerManager;
 
 #include"Math.h"
 
@@ -41,6 +42,9 @@ class MonsterManager;
 #include"GameObjectManager.h"
 #include"GameObject.h"
 #include"FrameManager.h"
+
+#include "Player.h"
+#include "PlayerManager.h"
 
 #include"Monster.h"
 #include"MonsterManager.h"

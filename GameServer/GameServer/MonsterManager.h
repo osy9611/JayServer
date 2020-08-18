@@ -8,6 +8,7 @@ public:
 
 	float RandomSet(float min, float max);
 
+	float GetMonsterCount() { return monsterList.size(); }
 	void Write(OutputMemoryStream& os);
 	void Read(InputMemoryStream& is);
 	std::vector<Monster*> monsterList;
