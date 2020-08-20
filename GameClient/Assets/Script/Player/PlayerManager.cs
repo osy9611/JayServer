@@ -44,11 +44,11 @@ public class PlayerManager : MonoBehaviour
         PlayerList.Add(_player.Name, _player);
     }
 
-    public void SearchPlayer(string _name, Vector3 _pos, float _rot)
+    public void SearchPlayer(string _name, Vector3 _pos, Vector3 _dir, float _rot)
     {
         if (PlayerList.ContainsKey(_name))
         {
-            PlayerList[_name].SetPos(_pos, _rot);
+            PlayerList[_name].SetPos(_pos, _dir, _rot);
         }
         else
         {

@@ -20,3 +20,15 @@ void FrameManager::Timer()
 		dTime = 0;
 	}
 }
+
+bool FrameManager::TickCount()
+{
+	static int timer = GetTickCount();
+	if (GetTickCount() - timer >= 100)
+	{
+		timer = GetTickCount();
+		return true;
+	}
+
+	return false;
+}

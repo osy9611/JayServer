@@ -36,7 +36,7 @@ void PlayerManager::UpdateRead(InputMemoryStream& is)
 	{
 		Player* _player = new Player();
 		PlayerData data;
-		data.Init(_name, 5, 100, 1);
+		data.Init(_name, 10, 100, 1);
 		_player->SetData(data);
 		PlayerList.insert(std::make_pair(_name, _player));
 		PlayerList[_name]->Read(is);

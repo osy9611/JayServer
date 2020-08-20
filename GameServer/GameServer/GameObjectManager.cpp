@@ -10,14 +10,14 @@ void GameObjectManager::Init()
 void GameObjectManager::Update()
 {
 	float time = 0;
+	bool isSend = 0;
 	time = _FrameManager.GetTime();
 	playerManager->Update(time);
 	monsterManager->Update(time);
-	dTime += time;
-	if (dTime > 0.3)
+	isSend = _FrameManager.TickCount();
+	if (isSend)
 	{
 		SendToClientPacket();
-		dTime = 0;
 	}
 }
 

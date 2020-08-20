@@ -56,5 +56,8 @@ private:
 	float timeStamp = 0;
 
 	bool isMove = true;
+
+	float latency = 0;
 };
 
+typedef std::shared_ptr<Player> PlayerPtr;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private bool isFirst;
     public bool isPlayer = false;
     private bool isMove = false;
     public float Speed = 5;
@@ -11,10 +12,14 @@ public class Player : MonoBehaviour
     public string Name;
 
     public Vector3 ServerPos;
+    public Vector3 ServerDir;
     public float ServerRot;
+
+    private Animator Ani;
     // Start is called before the first frame update
     void Start()
     {
+        Ani = GetComponent<Animator>();
         if(isPlayer)
         {
             PlayerManager.instance.SetPlayer(this);
@@ -27,12 +32,17 @@ public class Player : MonoBehaviour
     {
         if (isPlayer)
             Move();
+
+        ServerPos = new Vector3(ServerPos.x + ServerDir.x * Time.deltaTime * Speed * NetWork.instance.Latency, ServerPos.y, ServerPos.z + ServerDir.z * Time.deltaTime * Speed * NetWork.instance.Latency);
+        transform.position = Vector3.Lerp(transform.position, ServerPos, Time.deltaTime * Speed);
+
+        if(ServerDir == Vector3.zero)
+        {
+            Ani.SetBool("Walk", false);
+        }
         else
         {
-            if (isMove)
-            {
-                transform.position = Vector3.Lerp(transform.position, ServerPos, Time.deltaTime * Speed);
-            }
+            Ani.SetBool("Walk", true);
         }
     }
 
@@ -45,6 +55,7 @@ public class Player : MonoBehaviour
             Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.D))
         {
             Write();
+            //ServerPos = new Vector3(ServerPos.x + ServerDir.x * Time.deltaTime * Speed * NetWork.instance.Latency, ServerPos.y, ServerPos.z + ServerDir.z * Time.deltaTime * Speed * NetWork.instance.Latency);
         }
 
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) ||
@@ -52,8 +63,6 @@ public class Player : MonoBehaviour
         {
             Write();
         }
-
-        transform.Translate(dir.normalized * Time.deltaTime * Speed);
     }
 
     public void SetName(string _name)
@@ -62,12 +71,14 @@ public class Player : MonoBehaviour
         PlayerManager.instance.SetPlayer(this);
     }
 
-    public void SetPos(Vector3 _pos, float _rot)
+    public void SetPos(Vector3 _pos, Vector3 _dir, float _rot)
     {
-        isMove = false;
+        //isMove = false;
         ServerPos = _pos;
+        ServerDir = _dir;
         ServerRot = _rot;
-        isMove = true;
+
+        //isMove = true;
     }
 
     public void Write()

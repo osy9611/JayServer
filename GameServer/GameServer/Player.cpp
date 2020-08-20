@@ -14,6 +14,7 @@ void Player::Write(OutputMemoryStream &os)
 {
 	os.Write(Data.Name);
 	os.Write(GetPosition());
+	os.Write(GetVelocity());
 	os.Write(GetRotation());
 }
 
@@ -33,7 +34,8 @@ void Player::Read(InputMemoryStream& is)
 void Player::SetVector(Vector3 _pos, Vector3 _dir,float _rot)
 {
 	prevData.SetData(GetPosition(), GetVelocity(), GetRotation());
-	SetPosition(_pos);
+
+	//SetPosition(_pos);
 	SetVelocity(_dir);
 	SetRotation(_rot);
 }

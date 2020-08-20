@@ -63,6 +63,9 @@ bool IOCP::InitSocket()
 		std::cout << "家南 积己 角菩" << std::endl;
 	}
 
+	int option = FALSE;
+	setsockopt(m_Socket, IPPROTO_TCP, TCP_NODELAY, (const char*)&option, sizeof(option));
+
 	m_hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
 	if (m_hIOCP == NULL)
 		return false;
@@ -155,7 +158,7 @@ bool IOCP::CreateWorkThread()
 	return true;
 }
 
-void IOCP:: AcceptThread()
+void IOCP::AcceptThread()
 {
 	SOCKADDR_IN ClientAddr;
 	int nAddrLen = sizeof(SOCKADDR_IN);
@@ -187,7 +190,7 @@ void IOCP:: AcceptThread()
 
 			hIOCP = CreateIoCompletionPort((HANDLE)m_SessionList[SessionID]->m_Socket,
 				m_hIOCP,
-				reinterpret_cast<DWORD>(m_SessionList[SessionID]),
+				(ULONG_PTR)(m_SessionList[SessionID]),
 				0);
 
 			if (hIOCP == NULL || m_hIOCP != hIOCP)
@@ -222,7 +225,7 @@ void IOCP::WorkThread()
 		result = GetQueuedCompletionStatus(
 			m_hIOCP,
 			&ioSize,
-			(LPDWORD)&pServerSession,
+			(PULONG_PTR)&pServerSession,
 			(LPOVERLAPPED *)&pBuffer,
 			INFINITE);
 

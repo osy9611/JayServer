@@ -24,6 +24,10 @@ public class NetWork : MonoBehaviour
     public string IP;
     public int Port;
 
+    public float Latency;
+    private float timeStemp;
+    private float startTime;
+
     private Resolve resolve;
     //비동기용 오브젝트
     public class AsyncObject
@@ -62,6 +66,11 @@ public class NetWork : MonoBehaviour
         resolve = new Resolve();
 
         Connect();
+    }
+
+    private void Update()
+    {
+        timeStemp += Time.deltaTime;
     }
 
     public bool Connected
@@ -175,12 +184,17 @@ public class NetWork : MonoBehaviour
         //수신받은 자료의 크기가 1 이상일 때만 처리함
         if(recvByte >0)
         {
-            //공백 문자들이 많이 발생할 수 있으므로, 받은 바이트 수 만큼 배열을 선언하고 복사함
+            //공백 문자들이 많이 발생할 수 있으므로, 받은 바이트 수 만큼 배열을 선언하고 복사함              
             byte[] msgByte = new byte[recvByte];
 
             Array.Copy(ao.Buffer, msgByte, recvByte);
 
-            resolve.ReadMessage(msgByte, recvByte);            
+            resolve.ReadMessage(msgByte, recvByte);
+            if(startTime !=0)
+            {
+                Latency = timeStemp - startTime;
+            }
+            startTime = timeStemp;
         }
 
         try
