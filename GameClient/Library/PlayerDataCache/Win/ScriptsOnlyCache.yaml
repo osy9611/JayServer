@@ -13,10 +13,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -65,31 +63,31 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11716}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 11850}
+      Script: {instanceID: 11852}
     - Class: 114
-      Script: {instanceID: 11896}
+      Script: {instanceID: 11898}
     - Class: 114
-      Script: {instanceID: 12372}
+      Script: {instanceID: 12374}
     - Class: 114
-      Script: {instanceID: 12386}
+      Script: {instanceID: 12388}
     - Class: 114
-      Script: {instanceID: 12568}
-    - Class: 114
-      Script: {instanceID: 13232}
+      Script: {instanceID: 12570}
     - Class: 114
       Script: {instanceID: 13234}
     - Class: 114
-      Script: {instanceID: 13362}
+      Script: {instanceID: 13236}
     - Class: 114
-      Script: {instanceID: 13374}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13658}
+      Script: {instanceID: 13376}
     - Class: 114
-      Script: {instanceID: 13760}
+      Script: {instanceID: 13660}
     - Class: 114
-      Script: {instanceID: 14074}
+      Script: {instanceID: 13762}
+    - Class: 114
+      Script: {instanceID: 14062}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -425,7 +423,7 @@ ScriptsOnlyBuild:
     className: ObjectManager
   - hash:
       serializedVersion: 2
-      Hash: 4ba69224c2f9d00b4b675540fbe99166
+      Hash: d032d7feb6b6d512310c29b909317b32
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player

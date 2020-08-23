@@ -48,15 +48,14 @@ public:
 	void Write(OutputMemoryStream &os);
 	void Read(InputMemoryStream& is);
 private:
+	//플레이어 데이터
 	PlayerData Data;
-
+	//플레이어의 이전 데이터
 	PrevData prevData;
 
+	float rotDir = 0;
 	float dTime = 0;
 	float timeStamp = 0;
-
-	bool isMove = true;
-
 	float latency = 0;
 };
 
