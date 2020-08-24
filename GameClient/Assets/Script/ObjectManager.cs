@@ -42,9 +42,9 @@ public class ObjectManager : MonoBehaviour
             inInputStream.Read(ref _pos);
             Vector3 _dir = Vector3.zero;
             inInputStream.Read(ref _dir);
-            float _rot = 0;
-            inInputStream.Read(ref _rot);
-            PlayerManager.instance.SearchPlayer(name, _pos, _dir,_rot);
+            short state = 0;
+            inInputStream.Read(ref state);
+            PlayerManager.instance.SearchPlayer(name, _pos, _dir,state);
         }
     }
 

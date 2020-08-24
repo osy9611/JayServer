@@ -4368,16 +4368,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b4b66b48297704482d4b21fad5fa2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
-  Speed: 10
-  dir: {x: 0, y: 0, z: 0}
-  rot: 0
   Name: 11
-  mouseX: 0
-  mouserWheel: 0.5
-  ServerPos: {x: 0, y: 0, z: 0}
-  ServerDir: {x: 0, y: 0, z: 0}
-  ServerRot: 0
+  isPlayer: 0
+  playerObject: {fileID: 6029198285857654823}
+  speed: 10
+  mainCamera: {fileID: 0}
 --- !u!1 &6029198285857655293
 GameObject:
   m_ObjectHideFlags: 0

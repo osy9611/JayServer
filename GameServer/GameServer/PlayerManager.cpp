@@ -4,6 +4,8 @@ void PlayerManager::Update(float dTime)
 {
 	for (auto i = PlayerList.begin(); i != PlayerList.end(); ++i)
 	{
+		if (i->second == nullptr)
+			break;
 		i->second->Update(dTime);
 	}
 }

@@ -12,6 +12,6 @@ public:
 
 	const short GetUserCount() const { return PlayerList.size(); }
 private:
-	std::unordered_map<std::string, PlayerPtr> PlayerList;
+	std::unordered_map<std::string, Player*> PlayerList;
 };
 

@@ -3,33 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
-    public Camera mainCamera;
-    public Vector3 targetPos;
-    public Vector3 storeVector;
-    public GameObject a;
-    private bool isFirst;
-    public bool isPlayer = false;
-    private bool isMove = false;
-    public float Speed = 5;
-    public Vector3 dir;
-    public float rot;
-    float prevRot;
-    float SendTimeStamp = 0.0f;
+public class Player :MonoBehaviour
+{ 
     public string Name;
+    public PlayerState PT;
+    public bool isPlayer = false;
+    //자식 관련 데이터들
+    public GameObject playerObject;
+    //플레이어 속도
+    public float speed;
 
-    public float mouseX = 0.0f;
-    public float mouserWheel = 0.5f;
-    public Vector3 ServerPos;
-    public Vector3 ServerDir;
-    public float ServerRot;
+    //메인 카메라
+    public Camera mainCamera;
 
-    public Animator Ani;
-    // Start is called before the first frame update
-    void Start()
+    PlayerCommand CalcDir,ResetDir,command,Attack;
+    public PlayerActor playerActor;
+
+
+    private void Awake()
     {
-        //mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        playerActor = new PlayerActor();
+        playerActor.SetObject(Name,playerObject,mainCamera);
+        playerActor.tr = gameObject.transform;
+        SetCommand();
+    }
+
+    private void Start()
+    {
         if (isPlayer)
         {
             PlayerManager.instance.SetPlayer(this);
@@ -37,84 +37,56 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void SetCommand()
     {
-        if (isPlayer)
-            Move();
-      
-        Vector3 lookDir = Vector3.Slerp(a.transform.forward, ServerDir.normalized, Time.deltaTime * 5);
-        lookDir.Normalize();
+        CalcDir = new CalcDir();
+        ResetDir = new ResetDir();
+        Attack = new Attack();
+    }
 
-        float angle = Mathf.Acos(Vector3.Dot(Vector3.forward, lookDir)) * Mathf.Rad2Deg;
-        
-        if (ServerDir == Vector3.zero)
+    private void Update()
+    {
+        playerActor.SimulatonMove(speed, PT);
+        if(PT == PlayerState.Attack)
         {
-            Ani.SetBool("Walk", false);
+            playerActor.AttackOn();
         }
         else
         {
-            Ani.SetBool("Walk", true);
-            ServerPos = new Vector3(ServerPos.x + ServerDir.x * Time.deltaTime * Speed * NetWork.instance.Latency, ServerPos.y, ServerPos.z + ServerDir.z * Time.deltaTime * Speed * NetWork.instance.Latency);
-            a.transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
-            transform.position = Vector3.Lerp(transform.position, ServerPos, Time.deltaTime * Speed);
+            playerActor.AttackOff();
+        }
+
+        if(isPlayer)
+        {
+            InputCheck();
         }
     }
 
-    public bool mouseSend;
-    void Move()
+    void InputCheck()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if(Physics.Raycast(ray,out hit,10000f))
-            {
-                targetPos = new Vector3(hit.point.x, 0, hit.point.z);
-            }
+            CalcDir.Execute(playerActor, PlayerState.Move);
         }
-        else
+        else if (Input.GetMouseButtonUp(1))
         {
-            targetPos = Vector3.zero;
-            if(storeVector!=Vector3.zero)
-            {
-                dir = Vector3.zero;
-                Write();
-                storeVector = Vector3.zero;
-            }
+            ResetDir.Execute(playerActor, PlayerState.Idle);
         }
-
-        Vector3 dirToTarget = targetPos - transform.position;
-        dir = new Vector3((float)(Math.Truncate(dirToTarget.normalized.x * 10) / 10), 0, (float)(Math.Truncate(dirToTarget.normalized.z * 10) / 10));
-
-        if (SendTimeStamp >= 0.2f)
+        else if (Input.GetMouseButtonDown(0))
         {
-            if (targetPos != Vector3.zero)
-            {
-                if (storeVector != dir)
-                {
-                    storeVector = dir;
-                    Write();
-                }
-                else
-                {
-                    SendTimeStamp = 0;
-                }
-            }
+            Attack.Execute(playerActor, PlayerState.Attack);
         }
-        else
+        else if (Input.GetMouseButton(0))
         {
-            SendTimeStamp += Time.deltaTime;
+            CalcDir.Execute(playerActor, PlayerState.Attack);
         }
-     
-    }
-
-    void CheckSameRot()
-    {
-        if (prevRot != mouseX)
+        else if (Input.GetMouseButtonUp(0))
         {
-            Write();
-            prevRot = mouseX;
+            Attack.Execute(playerActor, PlayerState.Idle);
+        }
+        else if(Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
+        {
+            Attack.Execute(playerActor, PlayerState.Attack);
         }
     }
 
@@ -124,26 +96,10 @@ public class Player : MonoBehaviour
         PlayerManager.instance.SetPlayer(this);
     }
 
-    public void SetPos(Vector3 _pos, Vector3 _dir, float _rot)
+    public void SetPos(Vector3 _pos, Vector3 _dir,short _playerState)
     {
-        //isMove = false;
-        ServerPos = _pos;
-        ServerDir = _dir;
-        ServerRot = _rot;
-
-        //isMove = true;
+        playerActor.serverPos = _pos;
+        playerActor.serverDir = _dir;
+        PT = (PlayerState)_playerState;
     }
-
-    public void Write()
-    {
-        OutputMemoryStream os = new OutputMemoryStream();
-        os.Write((short)Defines.USER_DATA);
-        os.Write(this.Name);
-        os.Write(this.transform.position);
-        os.Write(dir);
-        //os.Write(this.transform.eulerAngles.y);
-        os.Write(rot);
-        NetWork.instance.Send(os);
-    }
-
 }

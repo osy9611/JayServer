@@ -1,5 +1,12 @@
 #pragma once
 
+enum PlayerState
+{
+	Idle,
+	Move,
+	Attack
+};
+
 struct PlayerData
 {
 	std::string Name;
@@ -34,6 +41,8 @@ struct PrevData
 class Player : public GameObject
 {
 public:
+	Player() {}
+	~Player() {}
 	void SetData(PlayerData _data) { Data = _data; }
 
 	void Update(float dTime);
@@ -43,15 +52,18 @@ public:
 	float GetSpeed() { return Data.Speed; }
 	void CalcDamage(float Damage);
 
-	void SetVector(Vector3 _pos, Vector3 _dir,float _rot);
+	void SetData(Vector3 _pos, Vector3 _dir,short _playerState);
 
 	void Write(OutputMemoryStream &os);
 	void Read(InputMemoryStream& is);
+
 private:
 	//플레이어 데이터
 	PlayerData Data;
 	//플레이어의 이전 데이터
 	PrevData prevData;
+
+	PlayerState PT = Attack;
 
 	float rotDir = 0;
 	float dTime = 0;
