@@ -13,7 +13,7 @@ public:
 	void MapRangeCheck();
 private:
 	float Speed;
-	float Hp;
+	float Hp = 100;
 	float Attack;
 
 	float dTime = 0;

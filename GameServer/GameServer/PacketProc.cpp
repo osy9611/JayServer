@@ -7,11 +7,20 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 
 	switch(type)
 	{
+	case GIVE_DATA:
+		_GameObjectManager.SendToClientPacket(nSessionID);
+		break;
+	case SET_COMPLETE:
+		_IOCP.SetSessionSendOk(nSessionID);
+		break;
 	case USER_DATA:
 		_GameObjectManager.UpdatePlayerManager(inInputStream);
 		break;
 	case USER_OUT:
 		_GameObjectManager.DeletePlayerManager(inInputStream);
+		break;
+	case CHECK_MONSTERS:
+		_GameObjectManager.CheckMonsterDamage(inInputStream);
 		break;
 	}
 }

@@ -38,7 +38,11 @@ void GameObjectManager::SendToClientPacket()
 void GameObjectManager::SendToClientPacket(int nSessionID)
 {
 	OutputMemoryStream os;
-	os.Write(USER_DATA);
+	short type = USER_DATA;
+	os.Write(type);
+
+	playerManager->Write(os);
+
 	monsterManager->Write(os);
 
 	os.SetSize();
@@ -53,4 +57,9 @@ void GameObjectManager::UpdatePlayerManager(InputMemoryStream& is)
 void GameObjectManager::DeletePlayerManager(InputMemoryStream& is)
 {
 	playerManager->DeleteRead(is);
+}
+
+void GameObjectManager::CheckMonsterDamage(InputMemoryStream& is)
+{
+	monsterManager->CalcMonsterDamage(is);
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public enum PlayerState
 {
     Idle,
@@ -47,10 +47,12 @@ public class PlayerActor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10000f))
         {
+
             targetPos = new Vector3(hit.point.x, 0, hit.point.z);
         }
         Vector3 dirToTarget = targetPos - tr.position;
         dir = new Vector3((float)(Math.Truncate(dirToTarget.normalized.x * 10) / 10), 0, (float)(Math.Truncate(dirToTarget.normalized.z * 10) / 10));
+
     }
 
     public void CalcDir(PlayerState _PT)
@@ -137,6 +139,7 @@ public class PlayerActor : MonoBehaviour
             playerObject.transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
 
         }
+
     }
 
     public void AttackOn()
@@ -178,6 +181,7 @@ public class PlayerActor : MonoBehaviour
         os.Write(tr.position);
         os.Write(dir);
         os.Write((short)_PT);
+       
         NetWork.instance.Send(os);
     }
 }

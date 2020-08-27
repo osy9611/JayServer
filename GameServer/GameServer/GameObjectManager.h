@@ -10,12 +10,15 @@ public:
 	void UpdatePlayerManager(InputMemoryStream& is);
 	void DeletePlayerManager(InputMemoryStream& is);
 	void SendToClientPacket(int nSessionID);
+
+	void CheckMonsterDamage(InputMemoryStream& is);
+
 	void Write(OutputMemoryStream os);
 	void Read(InputMemoryStream& is);
 
-private:
 	PlayerManager *playerManager;
 	MonsterManager *monsterManager;
+private:
 
 	float dTime = 0;
 	float SendTime = 0;

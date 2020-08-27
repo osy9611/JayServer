@@ -29,6 +29,8 @@ public class NetWork : MonoBehaviour
     private float startTime;
 
     private Resolve resolve;
+
+    private object lockObject = new object();
     //비동기용 오브젝트
     public class AsyncObject
     {
@@ -48,7 +50,7 @@ public class NetWork : MonoBehaviour
     private AsyncCallback m_fnSendHandler;
     
 
-    void Awake()
+    void Start()
     {
         if(instance == null)
         {
@@ -188,8 +190,11 @@ public class NetWork : MonoBehaviour
             byte[] msgByte = new byte[recvByte];
 
             Array.Copy(ao.Buffer, msgByte, recvByte);
-
-            resolve.ReadMessage(msgByte, recvByte);
+            lock(lockObject)
+            {
+                resolve.ReadMessage(msgByte, recvByte);
+            }
+         
             if(startTime !=0)
             {
                 Latency = timeStemp - startTime;
@@ -256,6 +261,11 @@ public class NetWork : MonoBehaviour
             {
                 Debug.Log("접속 성공!");
                 ST = ServerState.CONNECTED;
+
+                //접속에 성공하면 해당 맵의 데이터를 달라고 서버에 요청한다
+                OutputMemoryStream os = new OutputMemoryStream();
+                os.Write((short)Defines.GIVE_DATA);
+                Send(os);
             }
         }
     }

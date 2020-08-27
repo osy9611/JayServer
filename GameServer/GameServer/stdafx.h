@@ -32,6 +32,7 @@
 #pragma comment(lib, "d3dcompiler.lib")
 
 class GameObject;
+class GameObjectManager;
 class MonsterManager;
 class PlayerManager;
 
@@ -50,11 +51,13 @@ class PlayerManager;
 #include"GameObject.h"
 #include"FrameManager.h"
 
+#include"Monster.h"
+#include"MonsterManager.h"
+
 #include "Player.h"
 #include "PlayerManager.h"
 
-#include"Monster.h"
-#include"MonsterManager.h"
+
 
 #ifndef CONCATENATE
 #define CONCATENATE( arg1, arg2 )   _CONCATENATE1( arg1, arg2 )

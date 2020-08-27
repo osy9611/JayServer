@@ -153,6 +153,7 @@ void ServerSession::CloseSocket()
 			shutdown(m_Socket, SD_BOTH);
 			closesocket(m_Socket);
 			m_Socket = INVALID_SOCKET;
+			m_sendOk = false;
 		}
 	}
 }

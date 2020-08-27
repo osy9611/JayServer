@@ -12,13 +12,27 @@ void PlayerManager::Update(float dTime)
 
 void PlayerManager::Write(OutputMemoryStream& os)
 {
-	short playerCount = GetUserCount();
+	short playerCount = GetUserCount() + OutPlayerList.size();
 	os.Write(playerCount);
 	if (playerCount != 0)
 	{
 		for (auto i = PlayerList.begin(); i != PlayerList.end(); ++i)
 		{
 			i->second->Write(os);
+		}
+	}
+	
+	if (OutPlayerList.size() != 0)
+	{
+		short type = USER_OUT;
+		std::string _name;
+		for (int i = 0; i < OutPlayerList.size(); ++i)
+		{
+			_name = OutPlayerList.front();
+			std::cout << _name << std::endl;
+			os.Write(_name);
+			os.Write(type);
+			OutPlayerList.pop_front();
 		}
 	}
 }
@@ -53,7 +67,8 @@ void PlayerManager::DeleteRead(InputMemoryStream& is)
 	auto FindName = PlayerList.find(_name);
 	if (PlayerList.end() != FindName)
 	{
+		OutPlayerList.push_back(_name);
 		PlayerList.erase(_name);
-		std::cout << _name << " 立加辆丰" << std::endl;
+		std::cout << _name << " 立加辆丰" << std::endl;		
 	}
 }

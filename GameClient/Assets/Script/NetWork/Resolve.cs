@@ -17,6 +17,9 @@ public class Defines
 
     public static readonly short USER_DATA = 1500;
     public static readonly short USER_OUT = 1600;
+    public static readonly short CHECK_MONSTERS = 1700;
+    public static readonly short GIVE_DATA = 1800;
+    public static readonly short SET_COMPLETE = 1900;
 }
 public class Resolve
 {
@@ -40,9 +43,9 @@ public class Resolve
         Array.Copy(msgByte, 0, PacketBuffer, PacketBufferMarker, recvBytes);
 
         int nPacketData = this.PacketBufferMarker + msgByte.Length;
-        int nReadData = 0;
+        short nReadData = 0;
 
-        while(nPacketData>0) //받은 데이터를 모두 처리할 때까지 반복한다.
+        while (nPacketData>0) //받은 데이터를 모두 처리할 때까지 반복한다.
         {
             //남은 데이터가 패킷 헤더보다 작으면 중단한다.
             if(nPacketData < Defines.HEADERSIZE)
@@ -50,15 +53,17 @@ public class Resolve
                 break;
             }
 
-            Array.Copy(PacketBuffer, nReadData, Header, 0, Defines.HEADERSIZE);
-            int size = BitConverter.ToInt16(Header, 0);
+            Array.Copy(PacketBuffer, nReadData, Header, 0, Defines.HEADERSIZE);           
+            short size = BitConverter.ToInt16(Header, 0);
 
             if(size<=nPacketData) //일단 처리할 수 있는 만큼의 데이터가 있다면 패킷을 처리한다.
             {
-                InputMemoryStream io = new InputMemoryStream(msgByte, recvBytes);
+                byte[] buffer = new byte[size];
+                Array.Copy(PacketBuffer, nReadData, buffer, 0, size);
+                InputMemoryStream io = new InputMemoryStream(buffer, size);
                 CheckData(io,size);
                 nPacketData -= size;
-                nReadData += size;
+                nReadData += (short)size;
             }
             else
             {
@@ -72,6 +77,8 @@ public class Resolve
             Array.Copy(PacketBuffer, nReadData, TempBuffer, 0, nPacketData);
             Array.Copy(TempBuffer, 0, PacketBuffer, 0, nPacketData);
         }
+
+        PacketBufferMarker = nPacketData;
     }
 
     void CheckData(InputMemoryStream inInputStream,int size)

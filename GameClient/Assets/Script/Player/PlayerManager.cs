@@ -57,4 +57,35 @@ public class PlayerManager : MonoBehaviour
             IsSet = true;
         }
     }
+
+    public void DelteUser(string _name)
+    {
+        if(PlayerList.ContainsKey(_name))
+        {
+            PlayerList.Remove(_name);
+        }
+    }
+
+    public bool CheckUserList(string _name)
+    {
+        if (PlayerList.ContainsKey(_name))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public Player CheckUser(string _name)
+    {
+        if(PlayerList.ContainsKey(_name))
+        {
+            return PlayerList[_name];
+        }
+
+        return null;
+    }
+
 }

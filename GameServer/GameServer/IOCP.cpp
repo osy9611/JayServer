@@ -263,7 +263,7 @@ void IOCP::SendAllPlayer(const char* data, int size)
 {
 	for (int i = 0; i < m_SessionList.size(); ++i)
 	{
-		if (m_SessionList[i]->m_Socket != INVALID_SOCKET)
+		if (m_SessionList[i]->m_Socket != INVALID_SOCKET && m_SessionList[i]->GetSendOk())
 		{
 			m_SessionList[i]->SendPacket(data, size);
 		}
@@ -273,6 +273,11 @@ void IOCP::SendAllPlayer(const char* data, int size)
 void IOCP::SendPlayer(int nSessionID,const char* data, int size)
 {
 	m_SessionList[nSessionID]->SendPacket(data, size);
+}
+
+void IOCP::SetSessionSendOk(int nSessionID)
+{
+	m_SessionList[nSessionID]->SetSendOk(true);
 }
 
 void IOCP::CloseSession(int nSessionID)

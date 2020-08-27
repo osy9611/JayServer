@@ -6,13 +6,13 @@ void MonsterManager::Init()
 	{
 		Monster* monster = new Monster();
 		Vector3 Pos,Dir;
-		Pos.Set(RandomSet(-10, 10), 0, RandomSet(-10, 10));
+		Pos.Set(RandomSet(-40, 40), 0, RandomSet(-40, 40));
 		Dir.Set(RandomSet(-1, 1), 0, RandomSet(-1, 1));
 		monster->SetPosition(Pos);
 		monster->SetVelocity(Dir);
 		monster->SetNetworkID(i);
 
-		monsterList.push_back(monster);
+		monsterList.insert(std::make_pair(i, monster));
 	}
 }
 
@@ -42,6 +42,28 @@ void MonsterManager::Write(OutputMemoryStream& os)
 		for (int i = 0; i < NORMAL_MONSTER_COUNT; ++i)
 		{
 			monsterList[i]->Write(os);
+		}
+	}
+}
+
+void MonsterManager::CalcMonsterDamage(InputMemoryStream& is)
+{
+	std::string userName;
+	is.Read(userName);
+	Player* playerPos = _GameObjectManager.playerManager->PlayerList[userName];
+	short monsterCount;
+	is.Read(monsterCount);
+	short id;
+	if (monsterCount != 0)
+	{
+		for (size_t i = 0; i < monsterCount; ++i)
+		{
+			is.Read(id);
+			float angle = Dot(playerPos->GetVelocity(), monsterList[i]->GetPosition());
+			if (fabs(angle) <180)
+			{
+				monsterList[id]->CalcDamage(100);
+			}
 		}
 	}
 }

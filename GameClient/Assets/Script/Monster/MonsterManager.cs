@@ -7,14 +7,17 @@ public class MonsterManager : MonoBehaviour
     public static MonsterManager instance;
 
     public Dictionary<int, Monster> Monsters = new Dictionary<int, Monster>();
-
     public GameObject Monster;
 
     private bool IsSet=false;
-    private int _setId;
+    public int _setId;
     private Vector3 _setPos;
     private Vector3 _setDir;
+    private float _setHp;
 
+    public List<int> collisionCheckList = new List<int>();
+
+    private object lockObject = new object();
     private void Awake()
     {
         if(instance == null)
@@ -25,16 +28,21 @@ public class MonsterManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
     }
 
     private void Update()
     {
-        if(IsSet)
+        lock(lockObject)
         {
-            GameObject obj = Instantiate(this.Monster, _setPos, Quaternion.identity);
-            obj.GetComponent<Monster>().SetId(_setId);
-            IsSet = false;
+            if (IsSet)
+            {
+                GameObject obj = Instantiate(this.Monster, _setPos, Quaternion.identity);
+                obj.GetComponent<Monster>().SetId(_setId, _setHp);
+                IsSet = false;
+            }
         }
+     
     }
     
     public void SetMonster(Monster _monster)
@@ -42,18 +50,57 @@ public class MonsterManager : MonoBehaviour
         Monsters.Add(_monster.GetId(), _monster);
     }
 
-    public void SearchMonster(int _id,Vector3 _pos,Vector3 _dir)
+    public void SearchMonster(int _id,Vector3 _pos,Vector3 _dir,float _hp)
     {
-        if (Monsters.ContainsKey(_id))
+        lock(lockObject)
         {
-            Monsters[_id].SetPos(_pos, _dir);
+            if (Monsters.ContainsKey(_id))
+            {
+                Monsters[_id].SetPos(_pos, _dir, _hp);
+            }
+            else
+            {
+                CreateMonster(_id, _pos, _dir, _hp);
+            }
         }
-        else
+     
+    }
+
+    public void CreateMonster(int _id, Vector3 _pos, Vector3 _dir, float _hp)
+    {
+        _setId = _id;
+        _setPos = _pos;
+        _setDir = _dir;
+        _setHp = _hp;
+        IsSet = true;
+    }
+
+    public void SetCollisionCheck(int _id)
+    {
+        if(!collisionCheckList.Contains(_id))
         {
-            _setId = _id;
-            _setPos = _pos;
-            _setDir = _dir;
-            IsSet = true;
+            collisionCheckList.Add(_id);
         }
+        
+    }
+
+    public void Write(string name)
+    {
+        if(collisionCheckList.Count != 0)
+        {
+            OutputMemoryStream os = new OutputMemoryStream();
+            os.Write((short)Defines.CHECK_MONSTERS);
+            os.Write(name);
+            os.Write((short)collisionCheckList.Count);
+            for (int i = 0; i < collisionCheckList.Count; ++i)
+            {
+                os.Write((short)collisionCheckList[i]);
+            }
+
+            NetWork.instance.Send(os);
+
+            collisionCheckList.Clear();
+        }
+      
     }
 }

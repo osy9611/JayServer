@@ -1,5 +1,5 @@
 #pragma once
-#define NORMAL_MONSTER_COUNT 6
+#define NORMAL_MONSTER_COUNT 30
 class MonsterManager
 {
 public:
@@ -7,9 +7,11 @@ public:
 	void Update(float dTime);
 
 	float RandomSet(float min, float max);
-
 	float GetMonsterCount() { return monsterList.size(); }
+
+	void CalcMonsterDamage(InputMemoryStream& is);
+
 	void Write(OutputMemoryStream& os);
 	void Read(InputMemoryStream& is);
-	std::vector<Monster*> monsterList;
+	std::unordered_map<int,Monster*> monsterList;
 };

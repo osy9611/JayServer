@@ -19,10 +19,12 @@ public class Player :MonoBehaviour
     PlayerCommand CalcDir,ResetDir,command,Attack;
     public PlayerActor playerActor;
 
+    [HideInInspector]
+    public bool updateOK;
 
     private void Awake()
     {
-        playerActor = new PlayerActor();
+        playerActor = this.gameObject.AddComponent<PlayerActor>();
         playerActor.SetObject(Name,playerObject,mainCamera);
         playerActor.tr = gameObject.transform;
         SetCommand();
@@ -34,6 +36,7 @@ public class Player :MonoBehaviour
         {
             PlayerManager.instance.SetPlayer(this);
             PlayerManager.instance.playerName = Name;
+            this.gameObject.name = Name;
         }
     }
 
@@ -47,7 +50,8 @@ public class Player :MonoBehaviour
     private void Update()
     {
         playerActor.SimulatonMove(speed, PT);
-        if(PT == PlayerState.Attack)
+
+        if (PT == PlayerState.Attack)
         {
             playerActor.AttackOn();
         }
@@ -56,11 +60,18 @@ public class Player :MonoBehaviour
             playerActor.AttackOff();
         }
 
-        if(isPlayer)
+        if (isPlayer)
         {
             InputCheck();
         }
+
+        if(!PlayerManager.instance.CheckUserList(Name) && Name !="")
+        {
+            Destroy(this.gameObject);
+        }
     }
+
+  
 
     void InputCheck()
     {
@@ -93,6 +104,7 @@ public class Player :MonoBehaviour
     public void SetName(string _name)
     {
         Name = _name;
+        gameObject.name = _name;
         PlayerManager.instance.SetPlayer(this);
     }
 

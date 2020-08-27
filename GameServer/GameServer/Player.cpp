@@ -16,9 +16,9 @@ void Player::CalcDamage(float Damage)
 void Player::Write(OutputMemoryStream &os)
 {
 	os.Write(Data.Name);
+	os.Write(static_cast<short>(PT));
 	os.Write(GetPosition());
 	os.Write(GetVelocity());
-	os.Write(static_cast<short>(PT));
 }
 
 void Player::Read(InputMemoryStream& is)
@@ -31,6 +31,7 @@ void Player::Read(InputMemoryStream& is)
 	is.Read(state);
 	SetData(pos, dir,state);
 }
+
 
 void Player::SetData(Vector3 _pos, Vector3 _dir,short _playerState)
 {

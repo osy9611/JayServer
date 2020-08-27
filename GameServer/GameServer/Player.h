@@ -1,5 +1,7 @@
 #pragma once
 
+class Monster;
+
 enum PlayerState
 {
 	Idle,

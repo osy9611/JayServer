@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class ObjectManager : MonoBehaviour
 {
     public static ObjectManager instance;
 
+    private object lockObject = new object();
+
+    private bool FistCreateComplete = false;
     private void Awake()
     {
         if (instance == null)
@@ -34,31 +38,56 @@ public class ObjectManager : MonoBehaviour
 
     private void PlayerSet(InputMemoryStream inInputStream,short Count)
     {
-        for(int i=0;i<Count;++i)
+        lock(lockObject)
         {
-            string name ="";
-            inInputStream.Read(ref name);
-            Vector3 _pos = Vector3.zero;
-            inInputStream.Read(ref _pos);
-            Vector3 _dir = Vector3.zero;
-            inInputStream.Read(ref _dir);
-            short state = 0;
-            inInputStream.Read(ref state);
-            PlayerManager.instance.SearchPlayer(name, _pos, _dir,state);
+            for (int i = 0; i < Count; ++i)
+            {
+                string name = "";
+                inInputStream.Read(ref name);
+                short state = 0;
+                inInputStream.Read(ref state);
+                if (state == Defines.USER_OUT)
+                {
+                    PlayerManager.instance.DelteUser(name);
+                }
+                else
+                {
+                    Vector3 _pos = Vector3.zero;
+                    inInputStream.Read(ref _pos);
+                    Vector3 _dir = Vector3.zero;
+                    inInputStream.Read(ref _dir);
+                    PlayerManager.instance.SearchPlayer(name, _pos, _dir, state);
+                }
+
+            }
         }
     }
 
     private void MonsterSet(InputMemoryStream inInputStream,short Count)
     {
-        for (int i = 0; i < Count; ++i)
+        lock(lockObject)
         {
-            int _id = 0;
-            Vector3 _pos = new Vector3();
-            Vector3 _dir = new Vector3();
-            inInputStream.Read(ref _id);
-            inInputStream.Read(ref _pos);
-            inInputStream.Read(ref _dir);
-            MonsterManager.instance.SearchMonster(_id, _pos, _dir);
+            for (int i = 0; i < Count; i++)
+            {
+                int _id = 0;
+                Vector3 _pos = new Vector3();
+                Vector3 _dir = new Vector3();
+                float _hp = 0;
+                inInputStream.Read(ref _id);
+                inInputStream.Read(ref _pos);
+                inInputStream.Read(ref _dir);
+                inInputStream.Read(ref _hp);
+                MonsterManager.instance.SearchMonster(_id, _pos, _dir, _hp);
+            }
+
+            if(!FistCreateComplete)
+            {
+                OutputMemoryStream os = new OutputMemoryStream();
+                os.Write((short)Defines.SET_COMPLETE);
+                NetWork.instance.Send(os);
+                FistCreateComplete = true;
+            }
         }
+      
     }
 }

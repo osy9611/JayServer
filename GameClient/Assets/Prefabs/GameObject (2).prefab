@@ -45,11 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 13
+  PT: 0
   isPlayer: 0
   playerObject: {fileID: 7199617837644416315}
   speed: 10
   mainCamera: {fileID: 0}
   playerActor: {fileID: 0}
+  updateOK: 0
 --- !u!1001 &3478517938945526976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +118,18 @@ PrefabInstance:
     - target: {fileID: 6029198285858084315, guid: 2466bc64d9e050b45a334f910c2addde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6029198285858084315, guid: 2466bc64d9e050b45a334f910c2addde, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6029198285858084315, guid: 2466bc64d9e050b45a334f910c2addde, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6029198285858084315, guid: 2466bc64d9e050b45a334f910c2addde, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2466bc64d9e050b45a334f910c2addde, type: 3}

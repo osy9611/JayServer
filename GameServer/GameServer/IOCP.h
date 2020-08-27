@@ -37,6 +37,8 @@ public:
 	void SendAllPlayer(const char* data, int size);
 
 	void SendPlayer(int nSessionID ,const char* data, int size);
+
+	void SetSessionSendOk(int nSessionID);
 private:
 	void CloseSession(const int nSessionID);
 
