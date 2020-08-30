@@ -47,9 +47,6 @@ private:
 	//Work 스레드 생성
 	bool CreateWorkThread();
 
-	//Accepte 스레드 부름
-
-
 private:
 	SOCKET		m_Socket;
 

@@ -21,20 +21,18 @@ ServerSession::~ServerSession()
 bool ServerSession::InitSocket()
 {
 	WSADATA wsaData;
-
-	//! [WinSock 2.2] LOAD 
+	
 	int nRet = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (nRet != 0)
 	{
-		std::cout << "Failed WinSock2.2 DLL Load!\n";
+		std::cout << "Failed WinSock2.2 DLL Load!" << std::endl;
 		return false;
 	}
 
-	//! Create Socket 
 	m_Socket = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, NULL, WSA_FLAG_OVERLAPPED);
 	if (m_Socket == INVALID_SOCKET)
 	{
-		std::cout << "家南 积己 角菩!\n";
+		std::cout << "家南 积己 角菩!" << std::endl;
 		return false;
 	}
 
