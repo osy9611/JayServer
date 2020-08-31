@@ -1,11 +1,11 @@
 #pragma once
-class DBManager
+class DBManager : public GlobalSingleton<DBManager>
 {
 public:
 	DBManager();
 
 	//계정 검색
-	bool SearchAccount(const char* ID, const char* PW);
+	bool SearchAccount(InputMemoryStream& inInputStream,int nSessionID);
 private:
 	Database db;
 	Table tbl;
@@ -21,3 +21,4 @@ private:
 				   PASSWORD=@ppgk38629;";
 };
 
+#define _DBManager DBManager::Singleton()

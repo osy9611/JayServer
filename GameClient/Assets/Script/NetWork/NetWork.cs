@@ -263,19 +263,19 @@ public class NetWork : MonoBehaviour
                 ST = ServerState.CONNECTED;
 
                 //접속에 성공하면 해당 맵의 데이터를 달라고 서버에 요청한다
-                OutputMemoryStream os = new OutputMemoryStream();
-                os.Write((short)Defines.GIVE_DATA);
-                Send(os);
+                //OutputMemoryStream os = new OutputMemoryStream();
+                //os.Write((short)Defines.GIVE_DATA);
+                //Send(os);
             }
         }
     }
 
     private void OnApplicationQuit()
     {
-        OutputMemoryStream os = new OutputMemoryStream();
-        os.Write((short)Defines.USER_OUT);
-        os.Write(PlayerManager.instance.playerName);
-        Send(os);
+        //OutputMemoryStream os = new OutputMemoryStream();
+        //os.Write((short)Defines.USER_OUT);
+        //os.Write(PlayerManager.instance.playerName);
+        //Send(os);
         StopClient();
     }
 }

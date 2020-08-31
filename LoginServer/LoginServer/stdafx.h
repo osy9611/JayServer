@@ -33,6 +33,8 @@
 #include"IOCP.h"
 #include"ServerSession.h"
 
+#include "DBManager.h"
+
 #ifndef CONCATENATE
 #define CONCATENATE( arg1, arg2 )   _CONCATENATE1( arg1, arg2 )
 #define _CONCATENATE1( arg1, arg2 )  _CONCATENATE2( arg1, arg2 )

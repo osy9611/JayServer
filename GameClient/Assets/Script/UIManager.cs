@@ -5,12 +5,30 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Text text;
-    public Player player;
+    private string id;
+    private string pw;
 
-    // Update is called once per frame
-    void Update()
+    public InputField idInputField;
+    public InputField pwInputField;
+
+
+    public void SetId()
     {
-        text.text = "X: " + player.transform.position.x + " Y: " + player.transform.position.y + " Z: " + player.transform.position.z;
+        id = idInputField.text;
+    }
+
+    public void SetPw()
+    {
+        pw = pwInputField.text;
+    }
+
+    public void Connet()
+    {
+        NetWork.instance.Connect();
+        OutputMemoryStream os = new OutputMemoryStream();
+        os.Write((short)Defines.LOGIN_CHECK);
+        os.Write(id);
+        os.Write(pw);
+        NetWork.instance.Send(os);
     }
 }

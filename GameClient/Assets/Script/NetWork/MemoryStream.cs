@@ -83,6 +83,11 @@ public class InputMemoryStream
     public int GetHeadSize() { return mHead;}
     public void ResetToCapacity(int inDataCapacity) { mCapapcity = inDataCapacity; mHead = 0; }
 
+    public void Read (ref bool inData, int inDataCount = sizeof(bool))
+    {
+        inData = BitConverter.ToBoolean(mBuffer, mHead);
+        mHead += sizeof(bool);
+    }
     public void Read(ref short inData,int inDataCount = sizeof(short))
     {
         inData = BitConverter.ToInt16(mBuffer, mHead);

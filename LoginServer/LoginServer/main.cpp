@@ -6,10 +6,7 @@ int main()
 	std::cout << "Login Server" << std::endl;
 	_IOCP.Initialize();
 
-	while (true)
-	{
-
-	}
+	_DBManager.ConnectToDBServer();
 
 	return 0;
 }

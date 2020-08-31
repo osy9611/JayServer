@@ -2,8 +2,11 @@
 
 int main()
 {
-	DBManager * dbManager = new DBManager();
+	std::cout << "DB Server" << std::endl;
+	_IOCP.Initialize();
+	while (true)
+	{
 
-	dbManager->SearchAccount("a123", "1234");
+	}
 	return 0;
 }
