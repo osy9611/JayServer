@@ -140,6 +140,23 @@ bool Table::Get(char* FieldName, char* FieldValue)
 	return 1;
 }
 
+bool Table::Get(char* FieldName, std::string& inString)
+{
+	try
+	{
+		//파이썬과 자바스크립트와 같은 var와 같은 의미이다
+		_variant_t vtValue;
+		vtValue = m_Rec->Fields->GetItem(FieldName)->GetValue();
+		char FieldValue[1024];
+		sprintf(FieldValue, "%s", (LPCSTR)((_bstr_t)vtValue.bstrVal));
+		inString = FieldValue;
+	}
+
+	CATCHERRGET
+		sprintf(m_ErrStr, "Success");
+	return 1;
+}
+
 HRESULT Table::MoveNext()
 {
 	HRESULT hr;

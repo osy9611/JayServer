@@ -75,5 +75,7 @@ public:
 			//sprintf(m_ErrStr, "Successs");
 		return true;
 	}
+
+	bool Get(char* FieldName, std::string& inString);
 };
 

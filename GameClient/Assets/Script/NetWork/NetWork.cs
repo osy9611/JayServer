@@ -66,8 +66,6 @@ public class NetWork : MonoBehaviour
         m_fnReceiveHandler = new AsyncCallback(handleDataReceive);
         m_fnSendHandler = new AsyncCallback(handleDataSend);
         resolve = new Resolve();
-
-        Connect();
     }
 
     private void Update()
@@ -127,6 +125,7 @@ public class NetWork : MonoBehaviour
 
     public void StopClient()
     {
+        m_ClientSocket.Shutdown(SocketShutdown.Both);
         //클라이언트 소켓을 닫는다
         m_ClientSocket.Close();
     }
@@ -270,12 +269,24 @@ public class NetWork : MonoBehaviour
         }
     }
 
+    public void ReConnect(int port)
+    {
+        m_ClientSocket.Shutdown(SocketShutdown.Both);
+        m_ClientSocket.Close();
+        m_ClientSocket = null;
+        Port = port;
+        ConnectToServer(IP, Port);
+
+        OutputMemoryStream os = new OutputMemoryStream();
+        os.Write((short)Defines.GIVE_DATA);
+        Send(os);
+    }
+
     private void OnApplicationQuit()
     {
-        //OutputMemoryStream os = new OutputMemoryStream();
-        //os.Write((short)Defines.USER_OUT);
-        //os.Write(PlayerManager.instance.playerName);
-        //Send(os);
-        StopClient();
+        OutputMemoryStream os = new OutputMemoryStream();
+        os.Write((short)Defines.USER_OUT);
+        os.Write(GameManager.instance.UserName);
+        Send(os);
     }
 }

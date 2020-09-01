@@ -5,9 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-
-    public string playerName;
-
+    
     public Dictionary<string, Player> PlayerList = new Dictionary<string, Player>();
 
     public GameObject Player;

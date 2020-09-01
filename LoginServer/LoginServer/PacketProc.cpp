@@ -10,6 +10,9 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 	case LOGIN_CHECK:
 		_DBManager.SetLoginPacket(inInputStream, nSessionID);
 		break;
+	case SIGN_UP:
+		_DBManager.SetSignUpPacket(inInputStream, nSessionID);
+		break;
 	}
 }
 
@@ -23,7 +26,8 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream)
 	case LOG_IN_RESULT:
 		_DBManager.SetLoginResultPacket(inInputStream);
 		break;
-	case USERDATA:
+	case SIGN_UP_RESULT:
+		_DBManager.SetSignUpResultPacket(inInputStream);
 		break;
 	}
 }

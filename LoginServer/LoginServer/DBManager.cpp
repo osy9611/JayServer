@@ -75,6 +75,7 @@ void DBManager::SetLoginPacket(InputMemoryStream& io, int nSessionID)
 	Send(os);
 }
 
+
 void DBManager::SetLoginResultPacket(InputMemoryStream& io)
 {
 	bool result;
@@ -84,6 +85,36 @@ void DBManager::SetLoginResultPacket(InputMemoryStream& io)
 
 	OutputMemoryStream os;
 	os.Write((short)LOG_IN_RESULT);
+	os.Write(result);
+	os.SetSize();
+	_IOCP.SendPlayer(SessionID, os.GetBufferPtr(), os.GetDataLength());
+}
+
+void DBManager::SetSignUpPacket(InputMemoryStream& io, int nSessionID)
+{
+	std::string id;
+	std::string pw;
+	io.Read(id);
+	io.Read(pw);
+
+	OutputMemoryStream os;
+	os.Write((short)SIGN_UP);
+	os.Write(id);
+	os.Write(pw);
+	os.Write((short)nSessionID);
+	os.SetSize();
+	Send(os);
+}
+
+void DBManager::SetSignUpResultPacket(InputMemoryStream& io)
+{
+	bool result;
+	short SessionID;
+	io.Read(result);
+	io.Read(SessionID);
+
+	OutputMemoryStream os;
+	os.Write((short)SIGN_UP_RESULT);
 	os.Write(result);
 	os.SetSize();
 	_IOCP.SendPlayer(SessionID, os.GetBufferPtr(), os.GetDataLength());

@@ -24,6 +24,10 @@ public class Player :MonoBehaviour
 
     private void Awake()
     {
+        if(isPlayer)
+        {
+            Name = GameManager.instance.UserName;
+        }
         playerActor = this.gameObject.AddComponent<PlayerActor>();
         playerActor.SetObject(Name,playerObject,mainCamera);
         playerActor.tr = gameObject.transform;
@@ -35,7 +39,6 @@ public class Player :MonoBehaviour
         if (isPlayer)
         {
             PlayerManager.instance.SetPlayer(this);
-            PlayerManager.instance.playerName = Name;
             this.gameObject.name = Name;
         }
     }

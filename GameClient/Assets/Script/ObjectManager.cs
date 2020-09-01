@@ -21,6 +21,7 @@ public class ObjectManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        NetWork.instance.ReConnect(8081);
     }
 
     public void SetObject(InputMemoryStream inInputStream)

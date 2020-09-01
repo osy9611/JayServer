@@ -6,6 +6,10 @@ public:
 
 	//계정 검색
 	bool SearchAccount(InputMemoryStream& inInputStream,int nSessionID);
+	bool SignAccount(InputMemoryStream& inInputStream, int nSessionID);
+private:
+	bool SearchAcountResult(std::string _id, std::string _pw);
+	bool SignAccountReseult(std::string _id, std::string _pw);
 private:
 	Database db;
 	Table tbl;

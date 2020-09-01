@@ -17,6 +17,7 @@ public class Defines
 
     public static readonly short LOGIN_CHECK = 7500;
     public static readonly short LOGIN_RESULT = 7501;
+    public static readonly short SIGN_UP = 7502;
     public static readonly short USER_DATA = 1500;
     public static readonly short USER_OUT = 1600;
     public static readonly short CHECK_MONSTERS = 1700;
@@ -87,13 +88,14 @@ public class Resolve
     {
         short type = 0;
         inInputStream.Read(ref type);
-
         switch (type)
         {
-            case 7501:
-                bool result =false;
-                inInputStream.Read(ref result);
-                Debug.Log("LogIn : " + result);
+            case 7501:  //로그인 결과
+                LogInUI.instance.LogInResultCheck(inInputStream);
+                break;
+            case 7503: //회원가입 결과
+                Debug.Log("들어옴");
+                LogInUI.instance.SignInResultCheck(inInputStream);
                 break;
             case 1500:
                 ObjectManager.instance.SetObject(inInputStream);
