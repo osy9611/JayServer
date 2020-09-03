@@ -51,7 +51,6 @@ public:
 	HRESULT MovePrevious();
 	HRESULT MoveFirst();
 	HRESULT MoveLast();
-
 	int AddNew();
 	int Update();
 	int Add(char* FieldName, char* FieldValue);

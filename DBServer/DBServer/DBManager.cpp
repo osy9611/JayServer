@@ -50,32 +50,93 @@ bool DBManager:: SearchAccount(InputMemoryStream& inInputStream, int nSessionID)
 	return false;
 }
 
+bool DBManager::a(std::string _id, std::string _pw)
+{
+
+	std::string Query;
+
+	Query = "CALL SearchAccount('"
+		+ _id + "','" + _pw + "'" + ")";
+
+	int as;
+	if (db.Execute(Query.c_str(), tbl))
+	{
+		if (!tbl.ISEOF())
+		{
+			std::string id;
+			tbl.Get((char*)"ID", id);
+			if (id == "(null)")
+			{
+				std::cout << "로그인 실패!" << std::endl;
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+
+		}
+	}
+	return false;
+}
+
+bool DBManager::a1(std::string _id,std::string _pw)
+{
+	std::string query2;
+	query2 = "call SetCharactorCount('"
+		+ _id + "'"")";
+
+	std::string query;
+	query = "call SetCharactors('"
+		+ _id + "','" + _pw + "'" + ")";
+
+	if (db.Execute(query2.c_str(), tbl))
+	{
+		int id=0;
+		tbl.Get((char*)"CharactorCount", id);
+		std::cout << id << std::endl;
+	}
+	std::cout << "end" << std::endl;
+
+	if (db.Execute(query.c_str(), tbl))
+	{
+		std::string id;
+		while (!tbl.ISEOF())
+		{
+			tbl.Get((char*)"CharactorName", id);
+			std::cout << id << std::endl;
+			tbl.MoveNext();
+		}
+	}
+	std::cout << "end" << std::endl;
+	return true;
+}
+
+
+
 bool DBManager::SearchAcountResult(std::string _id, std::string _pw)
 {
 	std::string Query;
 
 	Query = "CALL SearchAccount('"
-		+ _id + "','" + _pw + "'," + "@ID)";
+		+ _id + "','" + _pw + "'" + ")";
 	if (db.Execute(Query.c_str(), tbl))
 	{
-		if (db.Execute("SELECT @ID", tbl))
+		if (!tbl.ISEOF())
 		{
-			if (!tbl.ISEOF())
+			std::string id;
+			tbl.Get((char*)"ID", id);
+			if (id == "(null)")
 			{
-				std::string id;
-				tbl.Get((char*)"@ID", id);
-				if (id == "(null)")
-				{
-					std::cout << "로그인 실패!" << std::endl;
-					return false;
-				}
-				else
-				{
-					std::cout << "로그인 성공!" << std::endl;
-					return true;
-				}
-				
+				std::cout << "로그인 실패!" << std::endl;
+				return false;
 			}
+			else
+			{
+				std::cout << id <<" 로그인 성공!" << std::endl;
+				return true;
+			}
+
 		}
 	}
 

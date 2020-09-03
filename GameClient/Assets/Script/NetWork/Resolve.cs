@@ -18,6 +18,8 @@ public class Defines
     public static readonly short LOGIN_CHECK = 7500;
     public static readonly short LOGIN_RESULT = 7501;
     public static readonly short SIGN_UP = 7502;
+    public static readonly short SIGN_UP_RESULT = 7503;
+    public static readonly short CREATE_CHARACTOR = 7504;
     public static readonly short USER_DATA = 1500;
     public static readonly short USER_OUT = 1600;
     public static readonly short CHECK_MONSTERS = 1700;

@@ -5,7 +5,9 @@
 #define LOG_IN_RESULT 7501
 #define SIGN_UP 7502
 #define SIGN_UP_RESULT 7503
+#define CREATE_CHARACTOR 7504;
 #define USERDATA 7502
+
 class DBManager : public GlobalSingleton<DBManager>
 {
 public:

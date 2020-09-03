@@ -27,7 +27,7 @@ public class LogInUI : MonoBehaviour
 
     bool _textOn;
 
-    bool inGameOn = false;
+    bool robbyOn = false;
     private void Awake()
     {
         if (instance == null)
@@ -51,12 +51,11 @@ public class LogInUI : MonoBehaviour
         }
         SignUpPanel.SetActive(PanelObjectOn);
 
-        if(inGameOn)
+        if(robbyOn)
         {
-            inGameOn = false;
-            SceneManager.LoadScene("Demo");
+            robbyOn = false;
+            SceneManager.LoadScene("Robby");
         }
-      
     }
     public void SetId()
     {
@@ -139,7 +138,7 @@ public class LogInUI : MonoBehaviour
         {
             Debug.Log("LogIn result : " + result);
             GameManager.instance.UserName = id;
-            inGameOn = true;
+            robbyOn = true;
         }
         else
         {
