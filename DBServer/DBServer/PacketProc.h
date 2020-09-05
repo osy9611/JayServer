@@ -3,6 +3,8 @@
 #define LOG_IN_RESULT 7501
 #define SIGN_UP 7502
 #define SIGN_UP_RESULT 7503
+#define CREATE_CHARACTOR 7504
+
 class PacketProc : public GlobalSingleton<PacketProc>
 {
 public:

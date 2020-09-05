@@ -78,14 +78,37 @@ void DBManager::SetLoginPacket(InputMemoryStream& io, int nSessionID)
 
 void DBManager::SetLoginResultPacket(InputMemoryStream& io)
 {
+	OutputMemoryStream os;
 	bool result;
 	short SessionID;
+	short userCount;
+
 	io.Read(result);
 	io.Read(SessionID);
-
-	OutputMemoryStream os;
+	io.Read(userCount);
+	std::cout << "캐릭터 생성 갯수 : " << userCount << std::endl;
 	os.Write((short)LOG_IN_RESULT);
 	os.Write(result);
+	os.Write(userCount);
+	if (userCount > 0)
+	{
+		for (int i = 0; i < userCount; ++i)
+		{
+			std::string _name;
+			short _level;
+			short _class;
+			io.Read(_name);
+			io.Read(_level);
+			io.Read(_class);
+			std::string _nameUTF8 = ANSIToUTF8(_name.c_str());
+			os.Write(_nameUTF8);
+			os.Write(_level);
+			os.Write(_class);
+
+			std::cout << _name << std::endl;
+		}
+	}
+
 	os.SetSize();
 	_IOCP.SendPlayer(SessionID, os.GetBufferPtr(), os.GetDataLength());
 }
@@ -118,6 +141,25 @@ void DBManager::SetSignUpResultPacket(InputMemoryStream& io)
 	os.Write(result);
 	os.SetSize();
 	_IOCP.SendPlayer(SessionID, os.GetBufferPtr(), os.GetDataLength());
+}
+
+void DBManager::SetCreateCharactorPacket(InputMemoryStream& io, int nSessionID)
+{
+	std::string ID, Name;
+	short className;
+
+	io.Read(ID);
+	io.Read(Name);
+	io.Read(className);
+	std::cout << Name << std::endl;
+	Name = UTF8ToANSI(Name.c_str());
+	OutputMemoryStream os;
+	os.Write((short)CREATE_CHARACTOR);
+	os.Write(ID);
+	os.Write(Name);
+	os.Write(className);
+	os.SetSize();
+	Send(os);
 }
 
 void DBManager::Handle_Receive(const char * data, int size)
@@ -168,4 +210,42 @@ void DBManager::Handle_Receive(const char * data, int size)
 
 	//남은 데이터 양을 저장하고 데이터 받기 요청
 	mPacketBufferMark = nPacketData;
+}
+
+char* DBManager::ANSIToUTF8(const char* pszCode)
+{
+	int     nLength, nLength2;
+	BSTR    bstrCode;
+	char*   pszUTFCode = NULL;
+
+	nLength = MultiByteToWideChar(CP_ACP, 0, pszCode, lstrlen(pszCode), NULL, NULL);
+	bstrCode = SysAllocStringLen(NULL, nLength);
+	MultiByteToWideChar(CP_ACP, 0, pszCode, lstrlen(pszCode), bstrCode, nLength);
+
+	nLength2 = WideCharToMultiByte(CP_UTF8, 0, bstrCode, -1, pszUTFCode, 0, NULL, NULL);
+	pszUTFCode = (char*)malloc(nLength2 + 1);
+	WideCharToMultiByte(CP_UTF8, 0, bstrCode, -1, pszUTFCode, nLength2, NULL, NULL);
+	SysFreeString(bstrCode);
+
+	return pszUTFCode;
+}
+
+char* DBManager::UTF8ToANSI(const char *pszCode)
+{
+	BSTR    bstrWide;
+	char*   pszAnsi;
+	int     nLength;
+
+	nLength = MultiByteToWideChar(CP_UTF8, 0, pszCode, lstrlen(pszCode) + 1, NULL, NULL);
+	bstrWide = SysAllocStringLen(NULL, nLength);
+
+	MultiByteToWideChar(CP_UTF8, 0, pszCode, lstrlen(pszCode) + 1, bstrWide, nLength);
+
+	nLength = WideCharToMultiByte(CP_ACP, 0, bstrWide, -1, NULL, 0, NULL, NULL);
+	pszAnsi = new char[nLength];
+
+	WideCharToMultiByte(CP_ACP, 0, bstrWide, -1, pszAnsi, nLength, NULL, NULL);
+	SysFreeString(bstrWide);
+
+	return pszAnsi;
 }

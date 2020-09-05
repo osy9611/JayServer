@@ -13,6 +13,9 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 	case SIGN_UP:
 		_DBManager.SetSignUpPacket(inInputStream, nSessionID);
 		break;
+	case CREATE_CHARACTOR:
+		_DBManager.SetCreateCharactorPacket(inInputStream, nSessionID);
+		break;
 	}
 }
 

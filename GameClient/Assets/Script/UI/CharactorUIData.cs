@@ -39,6 +39,7 @@ public class CharactorUIData : MonoBehaviour
 
     public void ShowChactor()
     {
+        GameManager.instance.UserName = Name.text;
         isShow = true;
     }
 

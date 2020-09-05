@@ -32,6 +32,7 @@ bool DBManager:: SearchAccount(InputMemoryStream& inInputStream, int nSessionID)
 		os.Write((short)LOG_IN_RESULT);
 		os.Write((bool)true);
 		os.Write(SessionID);
+		SetCharactor(os, ID);
 		os.SetSize();
 		_IOCP.SendPlayer(nSessionID, os.GetBufferPtr(), os.GetDataLength());
 		return true;
@@ -49,70 +50,6 @@ bool DBManager:: SearchAccount(InputMemoryStream& inInputStream, int nSessionID)
 	
 	return false;
 }
-
-bool DBManager::a(std::string _id, std::string _pw)
-{
-
-	std::string Query;
-
-	Query = "CALL SearchAccount('"
-		+ _id + "','" + _pw + "'" + ")";
-
-	int as;
-	if (db.Execute(Query.c_str(), tbl))
-	{
-		if (!tbl.ISEOF())
-		{
-			std::string id;
-			tbl.Get((char*)"ID", id);
-			if (id == "(null)")
-			{
-				std::cout << "로그인 실패!" << std::endl;
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-
-		}
-	}
-	return false;
-}
-
-bool DBManager::a1(std::string _id,std::string _pw)
-{
-	std::string query2;
-	query2 = "call SetCharactorCount('"
-		+ _id + "'"")";
-
-	std::string query;
-	query = "call SetCharactors('"
-		+ _id + "','" + _pw + "'" + ")";
-
-	if (db.Execute(query2.c_str(), tbl))
-	{
-		int id=0;
-		tbl.Get((char*)"CharactorCount", id);
-		std::cout << id << std::endl;
-	}
-	std::cout << "end" << std::endl;
-
-	if (db.Execute(query.c_str(), tbl))
-	{
-		std::string id;
-		while (!tbl.ISEOF())
-		{
-			tbl.Get((char*)"CharactorName", id);
-			std::cout << id << std::endl;
-			tbl.MoveNext();
-		}
-	}
-	std::cout << "end" << std::endl;
-	return true;
-}
-
-
 
 bool DBManager::SearchAcountResult(std::string _id, std::string _pw)
 {
@@ -139,8 +76,45 @@ bool DBManager::SearchAcountResult(std::string _id, std::string _pw)
 
 		}
 	}
-
 	return false;
+}
+
+void DBManager::SetCharactor(OutputMemoryStream &os, std::string _id)
+{
+	std::string query2;
+	query2 = "call SetCharactorCount('"
+		+ _id + "'"")";
+
+	std::string query;
+	query = "call SetCharactors('"
+		+ _id + "'"")";
+
+	if (db.Execute(query2.c_str(), tbl))
+	{
+		int _userCount = 0;
+		tbl.Get((char*)"CharactorCount", _userCount);
+		std::cout << _userCount << std::endl;
+		os.Write((short)_userCount);
+	}
+	std::cout << "end" << std::endl;
+
+	if (db.Execute(query.c_str(), tbl))
+	{
+		while (!tbl.ISEOF())
+		{
+			std::string id;			
+			int _level;
+			int _class;
+			tbl.Get((char*)"CharactorName", id);
+			os.Write(id);
+			tbl.Get((char*)"CharactorLevel", _level);
+			os.Write((short)_level);
+			tbl.Get((char*)"Class", _class);
+			os.Write((short)_class);
+			tbl.MoveNext();
+		}
+	}
+	std::cout << "end" << std::endl;
 }
 
 bool DBManager::SignAccount(InputMemoryStream& inInputStream, int nSessionID)
@@ -190,6 +164,27 @@ bool DBManager::SignAccountReseult(std::string _id, std::string _pw)
 	else
 	{
 		std::cout << "회원가입 실패!" << std::endl;
+		return false;
+	}
+}
+
+bool DBManager::CreateCharactor(InputMemoryStream& inInputStream)
+{
+	std::string Id, Name, Query;
+	short Class;
+	inInputStream.Read(Id);
+	inInputStream.Read(Name);
+	inInputStream.Read(Class);
+	Query = "CALL CreateCharactor('"
+		+ Id + "','" + Name + "'," + std::to_string(Class) + ")";
+	if (db.Execute(Query.c_str(), tbl))
+	{
+		std::cout << "캐릭터 기록 완료" << std::endl;
+		return true;
+	}
+	else
+	{
+		std::cout << "캐릭터 기록 실패" << std::endl;
 		return false;
 	}
 }

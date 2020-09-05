@@ -51,7 +51,8 @@ public class OutputMemoryStream
 
     public void Write(string inString)
     {
-        short elementCount = (short)inString.Length;
+        short elementCount = (short)Encoding.UTF8.GetByteCount(inString);
+        Debug.Log(inString + " 사이즈 : " + elementCount);
         Write(elementCount);
         Buffer.BlockCopy(Encoding.UTF8.GetBytes(inString), 0, mBuffer, mHead, elementCount);
         mHead += elementCount;

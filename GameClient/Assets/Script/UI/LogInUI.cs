@@ -138,6 +138,7 @@ public class LogInUI : MonoBehaviour
         {
             Debug.Log("LogIn result : " + result);
             GameManager.instance.UserName = id;
+            GameManager.instance.StoreCharactorData(io);
             robbyOn = true;
         }
         else

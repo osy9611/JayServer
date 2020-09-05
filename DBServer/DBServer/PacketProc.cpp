@@ -16,5 +16,9 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 		std::cout << "회원가입 확인중" << std::endl;
 		_DBManager.SignAccount(inInputStream, nSessionID);
 		break;
+	case CREATE_CHARACTOR:
+		std::cout << "캐릭터 생성중" << std::endl;
+		_DBManager.CreateCharactor(inInputStream);
+		break;
 	}
 }

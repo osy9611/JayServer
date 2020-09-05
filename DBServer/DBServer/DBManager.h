@@ -7,11 +7,10 @@ public:
 	//계정 검색
 	bool SearchAccount(InputMemoryStream& inInputStream,int nSessionID);
 	bool SignAccount(InputMemoryStream& inInputStream, int nSessionID);
-	bool a(std::string _id, std::string _pw);
-	bool a1(std::string _id, std::string _pw);
+	bool CreateCharactor(InputMemoryStream& inInputStream);
 private:
 	bool SearchAcountResult(std::string _id, std::string _pw);
-	
+	void SetCharactor(OutputMemoryStream &os,std::string _id);
 	bool SignAccountReseult(std::string _id, std::string _pw);
 private:
 	Database db;

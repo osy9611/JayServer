@@ -20,10 +20,10 @@
 #include"unordered_set"
 #include"unordered_map"
 #include<random>
-
+#include <cctype>
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib,"winmm.lib")
-
+#pragma execution_character_Set("utf-8")
 #include"CriticalSection.h"
 #include"GlobalSingleton.h"
 

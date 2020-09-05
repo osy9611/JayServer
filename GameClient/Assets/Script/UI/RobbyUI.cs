@@ -21,7 +21,7 @@ public class RobbyUI : MonoBehaviour
     //캐릭터 생성 관련
     public InputField CreateNameField;
     private string CreateName;
-    short _charactorCnt;
+    int _charactorCnt;
     int ClassNum;
 
     private void Awake()
@@ -31,6 +31,8 @@ public class RobbyUI : MonoBehaviour
             Animator ani = Charactors[i].GetComponent<Animator>();
             CharactorsAni.Add(ani);
         }
+
+        SetChractorList();
     }
 
     private void Update()
@@ -38,27 +40,21 @@ public class RobbyUI : MonoBehaviour
         if (inGameOn)
         {
             inGameOn = false;
-            SceneManager.LoadScene("Demo");
+            SceneManager.LoadScene("Demo"); 
         }
     }
 
-    public void SetChractorList(InputMemoryStream io)
+    public void SetChractorList()
     {
-        _charactorCnt = 0;
-        io.Read(ref _charactorCnt);
-        if(_charactorCnt >0)
+        if(GameManager.instance.charactorData.Count >0)
         {
-            for (int i = 0; i < _charactorCnt; ++i)
+            _charactorCnt = GameManager.instance.charactorData.Count;
+            for (int i = 0; i < GameManager.instance.charactorData.Count; ++i)
             {
-                string name = "";
-                short level = 0;
-                short classNum = 0;
-                io.Read(ref name);
-                io.Read(ref level);
-                io.Read(ref classNum);
-                charactorList[i].SetText(name, level, classNum);
+                charactorList[i].SetText(GameManager.instance.charactorData[i].Name, GameManager.instance.charactorData[i].Level, GameManager.instance.charactorData[i].Class);
                 charactorList[i].gameObject.SetActive(true);
             }
+            GameManager.instance.charactorData.Clear();
         }
     }
 
@@ -127,21 +123,19 @@ public class RobbyUI : MonoBehaviour
 
     public void CharactorCreate()
     {
-       
-        //OutputMemoryStream os = new OutputMemoryStream();
-        //os.Write((short)Defines.CREATE_CHARACTOR);
-        //os.Write(GameManager.instance.UserName);
-        Debug.Log(CreateName);
-        //os.Write(CreateName);
-        //os.Write((short)ClassNum);
-        //NetWork.instance.Send(os);
+        OutputMemoryStream os = new OutputMemoryStream();
+        os.Write((short)Defines.CREATE_CHARACTOR);
+        os.Write(GameManager.instance.UserName);
+        os.Write(CreateName);
+        os.Write((short)ClassNum);
+        NetWork.instance.Send(os);
         CharactorCreateUIOff();
         SetCharactorList(CreateName, (short)ClassNum);
     }
 
     public void GameStart()
     {
-        //inGameOn = true;
+        inGameOn = true;
     }
     
 }
