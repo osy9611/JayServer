@@ -24,3 +24,15 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 		break;
 	}
 }
+
+void PacketProc::CheckPacket(InputMemoryStream& inInputStream)
+{
+	short type;
+	inInputStream.Read(type);
+
+	switch (type)
+	{
+	case USER_DATA:
+		break;
+	}
+}

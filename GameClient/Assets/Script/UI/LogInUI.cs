@@ -24,10 +24,11 @@ public class LogInUI : MonoBehaviour
     public GameObject SignUpPanel;
     private bool PanelObjectOn;
     public Text _systemMessage;
-
-    bool _textOn;
-
+    
     bool robbyOn = false;
+
+    public List<string> Message = new List<string>();
+    int MessageIndexNum = 0;
     private void Awake()
     {
         if (instance == null)
@@ -42,6 +43,7 @@ public class LogInUI : MonoBehaviour
 
     private void Update()
     {
+        _systemMessage.text = Message[MessageIndexNum];
         TextSet();
 
         if (!PanelObjectOn)
@@ -86,7 +88,7 @@ public class LogInUI : MonoBehaviour
     {
         if(string.IsNullOrEmpty(id) || string.IsNullOrEmpty(pw))
         {
-            _systemMessage.text = "아이디 또는 패스워드를 기입하지 않았습니다";
+            MessageIndexNum = 1;
         }
         else
         {
@@ -116,7 +118,7 @@ public class LogInUI : MonoBehaviour
     {
         if (string.IsNullOrEmpty(signId) || string.IsNullOrEmpty(signPw))
         {
-            _systemMessage.text = "아이디 또는 패스워드를 기입하지 않았습니다";
+            MessageIndexNum = 1;
         }
         else
         {
@@ -143,7 +145,7 @@ public class LogInUI : MonoBehaviour
         }
         else
         {
-            _systemMessage.text = "회원 정보가 없습니다.";
+            MessageIndexNum = 2;
         }
     }
 
@@ -158,7 +160,7 @@ public class LogInUI : MonoBehaviour
         }
         else
         {
-            _systemMessage.text = "회원 정보가 이미 있습니다";
+            MessageIndexNum = 3;
         }
     }
 
@@ -172,8 +174,7 @@ public class LogInUI : MonoBehaviour
 
     IEnumerator TextOn()
     {
-        _textOn = false;
         yield return new WaitForSeconds(1.0f);
-        _systemMessage.text = "";
+        MessageIndexNum = 0;
     }
 }

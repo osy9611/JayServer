@@ -33,10 +33,12 @@
 
 class GameObject;
 class GameObjectManager;
+class PacketProc;
 class MonsterManager;
 class PlayerManager;
 
 #include"Math.h"
+
 
 #include"CriticalSection.h"
 #include"GlobalSingleton.h"
@@ -57,7 +59,7 @@ class PlayerManager;
 #include "Player.h"
 #include "PlayerManager.h"
 
-
+#include"DBManager.h"
 
 #ifndef CONCATENATE
 #define CONCATENATE( arg1, arg2 )   _CONCATENATE1( arg1, arg2 )

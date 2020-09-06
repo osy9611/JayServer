@@ -940,7 +940,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1340555218}
         m_TargetAssemblyTypeName: LogInUI, Assembly-CSharp
-        m_MethodName: SignUpPanelOn
+        m_MethodName: SignUpPanelOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1439,6 +1439,13 @@ MonoBehaviour:
   signUpPwInputField: {fileID: 1815300807}
   SignUpPanel: {fileID: 1848786977}
   _systemMessage: {fileID: 1768285444}
+  Message:
+  - 
+  - "\uC544\uC774\uB514 \uB610\uB294 \uD328\uC2A4\uC6CC\uB4DC\uB97C \uAE30\uC785\uD558\uC9C0
+    \uC54A\uC558\uC2B5\uB2C8\uB2E4"
+  - "\uD68C\uC6D0 \uC815\uBCF4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
+  - "\uD68C\uC6D0 \uC815\uBCF4\uAC00 \uC774\uBBF8 \uC788\uC2B5\uB2C8\uB2E4."
+  - 
 --- !u!114 &1340555219
 MonoBehaviour:
   m_ObjectHideFlags: 0
