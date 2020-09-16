@@ -1,4 +1,5 @@
 #pragma once
+#define SEARCH_USER_DB 1400
 #define LOGIN_CHECK 7500
 #define LOG_IN_RESULT 7501
 #define SIGN_UP 7502

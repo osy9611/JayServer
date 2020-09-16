@@ -24,7 +24,6 @@ public class CharactorUIData : MonoBehaviour
             isShow = false;
             if(!_robbyUI.isShow(ClassNum))
             {
-                Debug.Log("들어옴");
                 _robbyUI.CharactorOn(ClassNum);
             }
         }
@@ -40,6 +39,7 @@ public class CharactorUIData : MonoBehaviour
     public void ShowChactor()
     {
         GameManager.instance.UserName = Name.text;
+        GameManager.instance.Class = (short)ClassNum;
         isShow = true;
     }
 

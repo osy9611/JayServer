@@ -7,6 +7,8 @@ public:
 	void DeletePlayer();
 	void SendToClientPacket();
 
+	void CreatePlayerManager(InputMemoryStream& is);
+	void SetPlayerManager(InputMemoryStream& is);
 	void UpdatePlayerManager(InputMemoryStream& is);
 	void DeletePlayerManager(InputMemoryStream& is);
 	void SendToClientPacket(int nSessionID);

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wapon
+  - ColCheckObj
   layers:
   - Default
   - TransparentFX

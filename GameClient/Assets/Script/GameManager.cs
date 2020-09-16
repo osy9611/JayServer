@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public string UserName;
+    public short Class;
     [SerializeField]
     public List<CharactorData> charactorData = new List<CharactorData>();
 
@@ -35,8 +36,7 @@ public class GameManager : MonoBehaviour
     {
         if (robbyOn)
         {
-            robbyOn = false;
-           
+            robbyOn = false;          
         }
     }
 

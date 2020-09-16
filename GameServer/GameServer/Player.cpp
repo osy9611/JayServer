@@ -2,9 +2,30 @@
 
 void Player::Update(float dTime)
 {
+	float vx = GetVelocity().mX;
+	float vz = GetVelocity().mZ;
 	if (PT == Move)
 	{
-		SetPosition(GetPosition() + GetVelocity() * (Data.Speed * dTime));
+		if (GetPosition().mX <= -100 && vx <0)
+		{
+
+		}
+		else if (GetPosition().mX >= 100 && vx > 0)
+		{
+
+		}
+		else if (GetPosition().mZ <= -100 && vz < 0)
+		{
+
+		}
+		else if (GetPosition().mZ >= 100 && vz > 0)
+		{
+
+		}
+		else
+		{
+			SetPosition(GetPosition() + GetVelocity() * (Data.Speed * dTime));
+		}
 	}
 }
 

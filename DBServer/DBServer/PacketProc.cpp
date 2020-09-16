@@ -20,5 +20,9 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 		std::cout << "캐릭터 생성중" << std::endl;
 		_DBManager.CreateCharactor(inInputStream);
 		break;
+	case SEARCH_USER_DB:
+		std::cout << "유저 정보 로딩중" << std::endl;
+		_DBManager.SearchCharatorPos(inInputStream, nSessionID);
+		break;
 	}
 }

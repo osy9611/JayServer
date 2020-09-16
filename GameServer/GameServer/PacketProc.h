@@ -1,4 +1,6 @@
 #pragma once
+#define SEARCH_USER_DB 1400
+#define SET_CHARACTOR 1401
 #define USER_DATA 1500
 #define USER_OUT 1600
 #define CHECK_MONSTERS 1700

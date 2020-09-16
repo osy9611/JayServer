@@ -1,5 +1,5 @@
 #pragma once
-#define NORMAL_MONSTER_COUNT 30
+#define NORMAL_MONSTER_COUNT 50
 class MonsterManager
 {
 public:

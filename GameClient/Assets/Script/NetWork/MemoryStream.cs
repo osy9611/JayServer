@@ -31,6 +31,11 @@ public class OutputMemoryStream
         mCapacity = inNewDataLength;
     }
 
+    public void ResetData()
+    {
+        mHead = 0;
+    }
+
     public void Write(short inData, int inDataCount = sizeof(short))
     {
         Buffer.BlockCopy(BitConverter.GetBytes(inData), 0, mBuffer, mHead, inDataCount);
@@ -52,7 +57,6 @@ public class OutputMemoryStream
     public void Write(string inString)
     {
         short elementCount = (short)Encoding.UTF8.GetByteCount(inString);
-        Debug.Log(inString + " 사이즈 : " + elementCount);
         Write(elementCount);
         Buffer.BlockCopy(Encoding.UTF8.GetBytes(inString), 0, mBuffer, mHead, elementCount);
         mHead += elementCount;

@@ -59,6 +59,8 @@ class PlayerManager;
 #include "Player.h"
 #include "PlayerManager.h"
 
+#include "FieldManager.h"
+
 #include"DBManager.h"
 
 #ifndef CONCATENATE

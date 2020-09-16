@@ -31,7 +31,7 @@ void DBManager::Run()
 	while (true)
 	{
 		int ret = select(m_socket + 1, &read, &write, NULL, NULL);
-		if (ret = SOCKET_ERROR)
+		if (ret == SOCKET_ERROR)
 		{
 			std::cout << "Select ¿¡·¯" << std::endl;
 			break;

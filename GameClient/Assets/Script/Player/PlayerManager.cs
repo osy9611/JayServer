@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     public Dictionary<string, Player> PlayerList = new Dictionary<string, Player>();
 
     public GameObject Player;
-
+    public Camera camera;
     private bool IsSet = false;
     private string  _setName;
     private Vector3 _setPos;
@@ -32,6 +32,14 @@ public class PlayerManager : MonoBehaviour
         if (IsSet)
         {
             GameObject obj = Instantiate(this.Player, _setPos, Quaternion.identity);
+
+            if (_setName == GameManager.instance.UserName)
+            {
+                obj.GetComponent<Player>().isPlayer = true;
+                camera.transform.parent = obj.transform;
+                camera.transform.localPosition = new Vector3(0, 12.91f, -2.02f);
+            }
+
             obj.GetComponent<Player>().SetName(_setName);
             IsSet = false;
         }

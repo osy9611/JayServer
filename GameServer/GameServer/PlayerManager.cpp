@@ -37,6 +37,29 @@ void PlayerManager::Write(OutputMemoryStream& os)
 	}
 }
 
+void PlayerManager::CreateRead(InputMemoryStream& is)
+{
+	std::string _name;
+	Vector3 pos;
+	is.Read(_name);
+	is.Read(pos.mX);
+	is.Read(pos.mY);
+	is.Read(pos.mZ);
+	//플레이어 리스트에 없으면 리스트에 삽입함
+	auto FindName = PlayerList.find(_name);
+
+	if (PlayerList.end() == FindName)
+	{
+		std::cout << "캐릭터 없음" << std::endl;
+		Player* _player = new Player();
+		PlayerData data;
+		data.Init(_name, 10, 100, 1);
+		_player->SetData(data,pos);
+		PlayerList.insert(std::make_pair(_name, _player));
+		PlayerList[_name]->Read(is);
+	}
+}
+
 void PlayerManager::UpdateRead(InputMemoryStream& is)
 {
 	std::string _name;
@@ -48,15 +71,18 @@ void PlayerManager::UpdateRead(InputMemoryStream& is)
 	{
 		PlayerList[_name]->Read(is);
 	}
-	else
-	{
-		Player* _player = new Player();
-		PlayerData data;
-		data.Init(_name, 10, 100, 1);
-		_player->SetData(data);
-		PlayerList.insert(std::make_pair(_name, _player));
-		PlayerList[_name]->Read(is);
-	}
+}
+
+void PlayerManager::CreateWrite(InputMemoryStream& is)
+{
+	std::string _name;
+	is.Read(_name);
+
+	OutputMemoryStream os;
+	os.Write((short)SEARCH_USER_DB);
+	os.Write(_name);
+	os.SetSize();
+	_DBManager.Send(os);
 }
 
 void PlayerManager::DeleteRead(InputMemoryStream& is)

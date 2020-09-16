@@ -276,10 +276,16 @@ public class NetWork : MonoBehaviour
         m_ClientSocket = null;
         Port = port;
         ConnectToServer(IP, Port);
-
         OutputMemoryStream os = new OutputMemoryStream();
+        os.Write((short)Defines.SET_CHARATOR);
+        os.Write(GameManager.instance.UserName);
+        Send(os);
+
+        os.ResetData();
+
         os.Write((short)Defines.GIVE_DATA);
         Send(os);
+
     }
 
     private void OnApplicationQuit()

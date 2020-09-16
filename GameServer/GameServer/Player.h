@@ -45,7 +45,7 @@ class Player : public GameObject
 public:
 	Player() {}
 	~Player() {}
-	void SetData(PlayerData _data) { Data = _data; }
+	void SetData(PlayerData _data, Vector3 _pos) { Data = _data; SetPosition(_pos); }
 
 	void Update(float dTime);
 

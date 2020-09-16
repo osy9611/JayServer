@@ -6,8 +6,13 @@ public:
 
 	//계정 검색
 	bool SearchAccount(InputMemoryStream& inInputStream,int nSessionID);
+	//회원가입
 	bool SignAccount(InputMemoryStream& inInputStream, int nSessionID);
+	//캐릭터 생성
 	bool CreateCharactor(InputMemoryStream& inInputStream);
+
+	//캐릭터 위치값 생성
+	bool SearchCharatorPos(InputMemoryStream& inInputStream,int nSessionID);
 private:
 	bool SearchAcountResult(std::string _id, std::string _pw);
 	void SetCharactor(OutputMemoryStream &os,std::string _id);

@@ -1,7 +1,6 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - AniSendData
     - CharactorUIData
     - GameManager
     - LogInUI
@@ -97,8 +96,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 54
-      Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
     - Class: 74
@@ -123,8 +120,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11986}
     - Class: 114
       Script: {instanceID: 12288}
-    - Class: 114
-      Script: {instanceID: 12310}
     - Class: 114
       Script: {instanceID: 12322}
     - Class: 114
@@ -1172,7 +1167,7 @@ ScriptsOnlyBuild:
     className: NetWork
   - hash:
       serializedVersion: 2
-      Hash: 5f5bfa57ad5d0d098d4d2f58eea72765
+      Hash: e50521c87427d24e181a1b564024837b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1208,7 +1203,7 @@ ScriptsOnlyBuild:
     className: LiftGammaGain
   - hash:
       serializedVersion: 2
-      Hash: 9248bbf2afe37b94a18e2310b3e21a9e
+      Hash: c6cf43fab46b55ecec30d5408f786e92
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LogInUI
@@ -1292,7 +1287,7 @@ ScriptsOnlyBuild:
     className: SceneRenderPipeline
   - hash:
       serializedVersion: 2
-      Hash: 26fe8d64d18a6adb64611d959c11fe05
+      Hash: 442d073fe6e7a77d28336a9d43746a1b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerManager

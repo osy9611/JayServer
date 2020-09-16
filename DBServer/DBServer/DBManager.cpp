@@ -88,33 +88,36 @@ void DBManager::SetCharactor(OutputMemoryStream &os, std::string _id)
 	std::string query;
 	query = "call SetCharactors('"
 		+ _id + "'"")";
+	int _userCount = 0;
 
 	if (db.Execute(query2.c_str(), tbl))
 	{
-		int _userCount = 0;
+
 		tbl.Get((char*)"CharactorCount", _userCount);
 		std::cout << _userCount << std::endl;
 		os.Write((short)_userCount);
 	}
-	std::cout << "end" << std::endl;
-
-	if (db.Execute(query.c_str(), tbl))
+	if (_userCount > 0)
 	{
-		while (!tbl.ISEOF())
+		if (db.Execute(query.c_str(), tbl))
 		{
-			std::string id;			
-			int _level;
-			int _class;
-			tbl.Get((char*)"CharactorName", id);
-			os.Write(id);
-			tbl.Get((char*)"CharactorLevel", _level);
-			os.Write((short)_level);
-			tbl.Get((char*)"Class", _class);
-			os.Write((short)_class);
-			tbl.MoveNext();
+			while (!tbl.ISEOF())
+			{
+				std::string id;
+				int _level;
+				int _class;
+				tbl.Get((char*)"CharactorName", id);
+				os.Write(id);
+				tbl.Get((char*)"CharactorLevel", _level);
+				os.Write((short)_level);
+				tbl.Get((char*)"Class", _class);
+				os.Write((short)_class);
+				tbl.MoveNext();
+			}
 		}
+
 	}
-	std::cout << "end" << std::endl;
+	
 }
 
 bool DBManager::SignAccount(InputMemoryStream& inInputStream, int nSessionID)
@@ -187,4 +190,39 @@ bool DBManager::CreateCharactor(InputMemoryStream& inInputStream)
 		std::cout << "캐릭터 기록 실패" << std::endl;
 		return false;
 	}
+}
+
+bool DBManager::SearchCharatorPos(InputMemoryStream& inInputStream,int nSessionID)
+{
+	std::string Name, Query;
+
+	inInputStream.Read(Name);
+
+	Query = "CALL SearchCharactorPos('" + Name + "',@x,@y,@z)";
+
+	if (db.Execute(Query.c_str(), tbl))
+	{
+		if (db.Execute("SELECT @x,@y,@z",tbl))
+		{
+			std::cout << "캐릭터 데이터 가져옴" << std::endl;
+			OutputMemoryStream os;
+			float pos;
+			os.Write((short)SEARCH_USER_DB);
+			os.Write(Name);
+			tbl.Get((char*)"@x", pos);
+			os.Write(pos);
+			tbl.Get((char*)"@y", pos);
+			os.Write(pos);
+			tbl.Get((char*)"@z", pos);
+			os.Write(pos);
+			os.SetSize();
+			_IOCP.SendPlayer(nSessionID, os.GetBufferPtr(), os.GetDataLength());
+		}
+		return true;
+	}
+	else
+	{
+		std::cout << "캐릭터 데이터 못가져옴" << std::endl;
+	}
+	return false;
 }

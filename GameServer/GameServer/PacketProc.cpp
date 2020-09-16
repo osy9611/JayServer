@@ -6,7 +6,7 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 	inInputStream.Read(type);
 
 	switch(type)
-	{
+	{ 
 	case GIVE_DATA:
 		_GameObjectManager.SendToClientPacket(nSessionID);
 		break;
@@ -22,6 +22,8 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream, int nSessionID)
 	case CHECK_MONSTERS:
 		_GameObjectManager.CheckMonsterDamage(inInputStream);
 		break;
+	case  SET_CHARACTOR:
+		_GameObjectManager.SetPlayerManager(inInputStream);
 	}
 }
 
@@ -32,7 +34,8 @@ void PacketProc::CheckPacket(InputMemoryStream& inInputStream)
 
 	switch (type)
 	{
-	case USER_DATA:
+	case  SEARCH_USER_DB:
+		_GameObjectManager.CreatePlayerManager(inInputStream);
 		break;
 	}
 }

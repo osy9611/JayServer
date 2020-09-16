@@ -47,7 +47,6 @@ public class PlayerActor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10000f))
         {
-
             targetPos = new Vector3(hit.point.x, 0, hit.point.z);
         }
         Vector3 dirToTarget = targetPos - tr.position;
@@ -123,6 +122,7 @@ public class PlayerActor : MonoBehaviour
     
     public void SimulatonMove(float _speed,PlayerState _PT)
     {
+
         Vector3 lookDir = Vector3.Slerp(playerObject.transform.forward, serverDir.normalized, Time.deltaTime * 5);
         lookDir.Normalize();
 
@@ -134,7 +134,7 @@ public class PlayerActor : MonoBehaviour
         {
             Ani.SetBool("Walk", true);
             //서버에서 들어오는 딜레이를 추가 계산하여 방향을 예측
-            serverPos = new Vector3(serverPos.x + serverDir.x * Time.deltaTime * _speed * NetWork.instance.Latency, serverPos.y, serverPos.z + serverDir.z * Time.deltaTime * _speed * NetWork.instance.Latency);
+            serverPos = new Vector3(serverPos.x + serverDir.x * Time.deltaTime * _speed * NetWork.instance.Latency, this.transform.position.y, serverPos.z + serverDir.z * Time.deltaTime * _speed * NetWork.instance.Latency);
             tr.position = Vector3.Lerp(tr.position, serverPos, Time.deltaTime * _speed);
             playerObject.transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
 
