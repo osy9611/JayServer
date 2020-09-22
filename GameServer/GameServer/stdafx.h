@@ -2,6 +2,7 @@
 #pragma waring(disable :4819)
 #define _WINSOCKAPI_
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #include<WS2tcpip.h>
 #include<Windows.h>
@@ -9,6 +10,7 @@
 
 #include"memory.h"
 #include<iostream>
+#include<fstream>
 #include<atltime.h>
 #include<vector>
 #include<deque>
@@ -48,6 +50,9 @@ class PlayerManager;
 
 #include"IOCP.h"
 #include"ServerSession.h"
+
+#include "ColliderData.h"
+#include "AreaManager.h"
 
 #include"GameObjectManager.h"
 #include"GameObject.h"

@@ -4,27 +4,33 @@ void Player::Update(float dTime)
 {
 	float vx = GetVelocity().mX;
 	float vz = GetVelocity().mZ;
+
 	if (PT == Move)
 	{
-		if (GetPosition().mX <= -100 && vx <0)
+		if (GetPosition().mX <= -200 && vx <0)
 		{
 
 		}
-		else if (GetPosition().mX >= 100 && vx > 0)
+		else if (GetPosition().mX >= 200 && vx > 0)
 		{
 
 		}
-		else if (GetPosition().mZ <= -100 && vz < 0)
+		else if (GetPosition().mZ <= -200 && vz < 0)
 		{
 
 		}
-		else if (GetPosition().mZ >= 100 && vz > 0)
+		else if (GetPosition().mZ >= 200 && vz > 0)
 		{
 
 		}
 		else
-		{
+		{			
 			SetPosition(GetPosition() + GetVelocity() * (Data.Speed * dTime));
+			if (!_AreaManager.InAreaCheck(AreaIndex, GetPosition()))
+			{
+				_AreaManager.SearchArea(GetPosition(), AreaIndex);
+				std::cout << "유저가 " << AreaIndex << " 번 배열로 이동" << std::endl;
+			}
 		}
 	}
 }

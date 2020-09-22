@@ -43,7 +43,11 @@ struct PrevData
 class Player : public GameObject
 {
 public:
-	Player() {}
+	Player() 
+	{ 
+		_AreaManager.SearchArea(GetPosition(), AreaIndex); 
+		std::cout << "현재 맵 위치 배열 번호 : " << AreaIndex << std::endl;
+ 	}
 	~Player() {}
 	void SetData(PlayerData _data, Vector3 _pos) { Data = _data; SetPosition(_pos); }
 
@@ -65,6 +69,8 @@ private:
 	//플레이어의 이전 데이터
 	PrevData prevData;
 
+	//맵을 분할한 배열 인덱스
+	int AreaIndex = 0;
 	PlayerState PT = Attack;
 
 	float rotDir = 0;

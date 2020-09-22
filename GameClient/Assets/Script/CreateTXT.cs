@@ -61,22 +61,22 @@ public class CreateTXT : MonoBehaviour
             }
         }
     }
-
     void SetTextFile()
     {
         FileStream fs = new FileStream(filePath, FileMode.Create);
         StreamWriter sw = new StreamWriter(fs);
-        sw.WriteLine(node.Count);
+        sw.WriteLine(node.Count+";");
         for (int i = node.Count - 1; i >= 0; --i)
         {
             sw.WriteLine(node[i].sx + ";" + node[i].sy + ";" + node[i].ex + ";" + node[i].ey + ";");
-            sw.WriteLine(node[i].obj.Count);
+            sw.WriteLine(node[i].obj.Count + ";");
             for(int j=0;j< node[i].obj.Count;++j)
             {
-                sw.WriteLine(node[i].obj[j].transform.position.x + ";" + node[i].obj[j].transform.position.y + ";" + node[i].obj[j].transform.position.z + ";");
+                sw.WriteLine(node[i].obj[j].colObj.transform.position.x + ";" + node[i].obj[j].colObj.transform.position.y + ";" + node[i].obj[j].colObj.transform.position.z + ";"
+                    + node[i].obj[j].CT + ";" + node[i].obj[j].radius + ";");
             }
         }
-
+        Debug.Log("파일 생성 성공!!");
         sw.Close();
         fs.Close();
     }

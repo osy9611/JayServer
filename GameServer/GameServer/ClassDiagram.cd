@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CriticalSectionLock" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAABAAAAAAgAAAAAAAAgAAA=</HashCode>
+      <FileName>CriticalSection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DBManager" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAIGAACAAACAAAAgAAAQAAQAAKACM=</HashCode>
+      <FileName>DBManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FieldManager" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAgAAAAAAAAAAAAAAAAAAAQAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>FieldManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FrameManager" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAEAAAAAAAAAAAAAAAAAEAAAAAAAAEAAA=</HashCode>
+      <FileName>FrameManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAQEAiCAAACAAgCAIAAiAAAgAkgAAAQIAAMAIBA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObjectManager" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAQAAAAAAJBAAAAQAEAgAAAAQAEAEAACAAEAAAA=</HashCode>
+      <FileName>GameObjectManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlobalSingleton&lt;T&gt;" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAEAAAAgAAAAAAA=</HashCode>
+      <FileName>GlobalSingleton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IOCP" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAgAEBAAAAAAAQAABEYAQABAAACAiAAAAAAEAkAAACA=</HashCode>
+      <FileName>IOCP.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector3" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIgAAAIAEBAAAgAAAQQBAASAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Math.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quaternion" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAACAAAABAABAAAAAAAAA=</HashCode>
+      <FileName>Math.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OutputMemoryStream" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAACAAAQIAAAAQAAAAAAAACQAAAEQAAA=</HashCode>
+      <FileName>MemoryStream.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputMemoryStream" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBAAABAAAAACAAAQAAACgQAAAAACAAEAAAAAAAAA=</HashCode>
+      <FileName>MemoryStream.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Monster" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAQAAAAAAAAAAhAIAAAgEAAAAAAAEAQAA=</HashCode>
+      <FileName>Monster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterManager" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAACAAAAgAAAAAAAAAAACAQEBAAA=</HashCode>
+      <FileName>MonsterManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacketProc" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PacketProc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAACBAAAAQAAAAAAAAAAgAAEAABEAAAAAAQEARFI=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerManager" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAQAAEAhAAAAAAAAAAAAAACIAAEAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>PlayerManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ServerSession" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAQAAAAECAAAABIKABACEAACAAIAAgIAAAMAIAAAEA=</HashCode>
+      <FileName>ServerSession.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AreaManager" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAACAAAAAAAACAgAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>AreaManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColliderData" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAAAABCAAAAAABAAAAAIAgACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ColliderData.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="CriticalSection" Collapsed="true">
+    <Position X="18.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CriticalSection.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Node" Collapsed="true">
+    <Position X="18.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAQAAAAA=</HashCode>
+      <FileName>FieldManager.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="FieldData" Collapsed="true">
+    <Position X="20.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAFAAAAAAAAAAAAAAIAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FieldManager.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Buffer" Collapsed="true">
+    <Position X="17" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAACAAA=</HashCode>
+      <FileName>IOCP.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PlayerData" Collapsed="true">
+    <Position X="17" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQBAIAAAAAAAAACAAAAQgA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PrevData" Collapsed="true">
+    <Position X="18.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAAAAAAAAAAAIACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PacketHeader" Collapsed="true">
+    <Position X="20.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ServerSession.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MapData" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAABABAQAAYAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>AreaManager.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="GameObjectPtr" Collapsed="true">
+    <Position X="17" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PlayerPtr" Collapsed="true">
+    <Position X="18.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="BUFFER_STATE" Collapsed="true">
+    <Position X="17" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>IOCP.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PlayerState" Collapsed="true">
+    <Position X="20.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ColliderType" Collapsed="true">
+    <Position X="18.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAQAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ColliderData.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

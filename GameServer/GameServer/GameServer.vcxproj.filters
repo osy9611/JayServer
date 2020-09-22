@@ -66,6 +66,12 @@
     <ClInclude Include="FieldManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="AreaManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IOCP.cpp">
@@ -108,6 +114,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="FieldManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AreaManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderData.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
