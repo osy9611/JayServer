@@ -10,6 +10,7 @@ public:
 
 	virtual void HandleDying() {}
 
+	virtual void CollisionCheck() {}
 	void SetRotation(float inRotation)					  { rotation = inRotation; }
 	float GetRotation()								const { return rotation; }
 

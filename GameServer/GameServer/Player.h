@@ -13,6 +13,7 @@ struct PlayerData
 {
 	std::string Name;
 	float Speed;
+	float storeSpeed;
 	float Hp, Mp;
 	float Attack;
 
@@ -20,9 +21,20 @@ struct PlayerData
 	{
 		Name = _name;
 		Speed = _speed;
+		storeSpeed = _speed;
 		Hp = _hp;
 		Mp = 100;
 		Attack = _attack;
+	}
+
+	void ResetSpeed()
+	{
+		Speed = 0;
+	}
+
+	void SetSpeed()
+	{
+		Speed = storeSpeed;
 	}
 };
 
@@ -62,7 +74,8 @@ public:
 
 	void Write(OutputMemoryStream &os);
 	void Read(InputMemoryStream& is);
-
+private:
+	void CollisionCheck();
 private:
 	//플레이어 데이터
 	PlayerData Data;

@@ -60,7 +60,7 @@ bool AreaManager::SearchArea(Vector3 _pos, int&index)
 	for (int i = 0; i < data.size(); ++i)
 	{
 		if (data[i].sx <= _pos.mX && _pos.mX  <= data[i].ex&&
-			data[i].sy <= _pos.mZ && _pos.mZ >= data[i].ey)
+			data[i].ey <= _pos.mZ && _pos.mZ <= data[i].sy)
 		{
 			index = i;
 			break;
@@ -73,7 +73,7 @@ bool AreaManager::SearchArea(Vector3 _pos, int&index)
 bool AreaManager::InAreaCheck(int index, Vector3 _pos)
 {
 	if (data[index].sx <= _pos.mX && _pos.mX <= data[index].ex&&
-		data[index].sy <= _pos.mZ && _pos.mZ >= data[index].ey)
+		data[index].ey <= _pos.mZ && _pos.mZ <= data[index].sy)
 	{
 		return true;
 	}

@@ -29,6 +29,8 @@ public:
 
 	//위치 체크
 	bool InAreaCheck(int index,Vector3 _pos);
+
+	const MapData & GetCollisionObjects(int _index) const { return data[_index]; }
 private:
 	std::vector<MapData> data;
 };

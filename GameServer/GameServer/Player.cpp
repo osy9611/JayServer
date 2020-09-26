@@ -7,7 +7,14 @@ void Player::Update(float dTime)
 
 	if (PT == Move)
 	{
-		if (GetPosition().mX <= -200 && vx <0)
+		if (!_AreaManager.InAreaCheck(AreaIndex, GetPosition()))
+		{
+			_AreaManager.SearchArea(GetPosition(), AreaIndex);
+			std::cout << "유저가 " << AreaIndex << " 번 배열로 이동" << std::endl;
+		}
+		SetPosition(GetPosition() + GetVelocity() * (Data.Speed * dTime));
+		CollisionCheck();
+		/*if (GetPosition().mX <= -200 && vx <0)
 		{
 
 		}
@@ -25,11 +32,53 @@ void Player::Update(float dTime)
 		}
 		else
 		{			
-			SetPosition(GetPosition() + GetVelocity() * (Data.Speed * dTime));
-			if (!_AreaManager.InAreaCheck(AreaIndex, GetPosition()))
+			
+		}*/
+	}
+}
+
+void Player::CollisionCheck()
+{
+	MapData it = _AreaManager.GetCollisionObjects(AreaIndex);
+	for (int i = 0; i < it.colData.size(); ++i)
+	{
+		//bool colCheck = it.colData[i].CheckCollider(GetPosition(),GetVelocity());
+		//if (colCheck)
+		//{
+		//	//std::cout << "맞음" << std::endl;
+		//	Data.ResetSpeed();
+		//}
+		//else
+		//{
+		//	//std::cout << "아님" << std::endl;
+		//	Data.SetSpeed();
+		//}
+
+		Vector3 targetPosition(it.colData[i].GetPosition().mX, 0, it.colData[i].GetPosition().mZ);
+		float targetRadius = it.colData[i].GetRadius();
+
+		Vector3 delta = targetPosition - GetPosition();
+		float distSq = delta.LengthSq();
+		float collisionDist = (1 + targetRadius);
+		if (distSq < (collisionDist * collisionDist))
+		{
+			Vector3 dirToTarget = delta;
+			dirToTarget.Normaize();
+			Vector3 acceptableDeltaFromSourceToTarget = dirToTarget * collisionDist;
+
+			SetPosition(targetPosition - acceptableDeltaFromSourceToTarget);
+
+			Vector3 relVel = GetVelocity();
+
+			float relVelDotDir = Dot(relVel, dirToTarget);
+
+			if (relVelDotDir > 0.f)
 			{
-				_AreaManager.SearchArea(GetPosition(), AreaIndex);
-				std::cout << "유저가 " << AreaIndex << " 번 배열로 이동" << std::endl;
+				Vector3 impulse = relVelDotDir * dirToTarget;
+				Vector3 mVelocity = GetVelocity();
+				mVelocity -= impulse;
+				mVelocity *= 0.1f;
+				SetVelocity(mVelocity);
 			}
 		}
 	}
