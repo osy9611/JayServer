@@ -135,7 +135,8 @@ public class PlayerActor : MonoBehaviour
             Ani.SetBool("Walk", true);
             //서버에서 들어오는 딜레이를 추가 계산하여 방향을 예측
             serverPos = new Vector3(serverPos.x + serverDir.x * Time.deltaTime * _speed * NetWork.instance.Latency, this.transform.position.y, serverPos.z + serverDir.z * Time.deltaTime * _speed * NetWork.instance.Latency);
-            tr.position = Vector3.Lerp(tr.position, serverPos, Time.deltaTime * _speed);
+            //tr.position = Vector3.Lerp(tr.position, serverPos, Time.deltaTime * _speed);
+            tr.position = Vector3.MoveTowards(tr.position, serverPos, Time.deltaTime * _speed);
             playerObject.transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
 
         }

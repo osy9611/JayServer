@@ -6,7 +6,7 @@ void MonsterManager::Init()
 	{
 		Monster* monster = new Monster();
 		Vector3 Pos,Dir;
-		Pos.Set(RandomSet(-40, 40), 0, RandomSet(-40, 40));
+		Pos.Set(RandomSet(-50, 50), -1, RandomSet(-50, 50));
 		Dir.Set(RandomSet(-1, 1), 0, RandomSet(-1, 1));
 		monster->SetPosition(Pos);
 		monster->SetVelocity(Dir);

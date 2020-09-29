@@ -10,6 +10,11 @@ public class MonsterManager : MonoBehaviour
     public GameObject Monster;
 
     private bool IsSet=false;
+
+    //몬스터 오브젝트를 킬떄
+    private bool IsOn = false;
+    private int onIndex = 0;
+
     public int _setId;
     private Vector3 _setPos;
     private Vector3 _setDir;
@@ -41,6 +46,14 @@ public class MonsterManager : MonoBehaviour
                 obj.GetComponent<Monster>().SetId(_setId, _setHp);
                 IsSet = false;
             }
+
+            if(IsOn)
+            {
+                Monsters[onIndex].transform.position = _setPos;
+                Monsters[onIndex].gameObject.SetActive(true);
+                Monsters[onIndex].SetPos(_setPos, _setDir, _setHp);               
+                IsOn = false;
+            }
         }
      
     }
@@ -56,7 +69,19 @@ public class MonsterManager : MonoBehaviour
         {
             if (Monsters.ContainsKey(_id))
             {
-                Monsters[_id].SetPos(_pos, _dir, _hp);
+                if (Monsters[_id].Hp == 0 && _hp ==100)
+                {
+                    _setId = _id;
+                    _setPos = _pos;
+                    _setDir = _dir;
+                    _setHp = _hp;
+                    onIndex = _id;
+                    IsOn = true;
+                }
+                else
+                {
+                    Monsters[_id].SetPos(_pos, _dir, _hp);
+                }           
             }
             else
             {

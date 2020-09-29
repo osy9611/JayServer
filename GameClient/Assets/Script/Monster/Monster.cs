@@ -11,6 +11,13 @@ public class Monster : MonoBehaviour
     public Vector3 ServerDir;
 
     public bool isHit;
+
+    public Animator ani;
+
+    private void Awake()
+    {
+        ani = GetComponent<Animator>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -18,12 +25,21 @@ public class Monster : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, ServerPos, Time.deltaTime * 2);
             transform.rotation = Quaternion.LookRotation(ServerDir);
+            ani.SetBool("Walk", true);
             if(Hp==0)
             {
-                this.gameObject.SetActive(false);
+                ani.SetBool("Walk", false);
+                ani.SetBool("Die", true);
+                StartCoroutine(SetDie());
             }
         }
     }
+
+    private void OnDisable()
+    {
+        isMove = false;
+    }
+
 
     public void SetId(int _id,float _hp)
     {
@@ -46,6 +62,11 @@ public class Monster : MonoBehaviour
         isHit = false;
     }
 
+    private IEnumerator SetDie()
+    {
+        yield return new WaitForSeconds(3.0f);
+        this.gameObject.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
