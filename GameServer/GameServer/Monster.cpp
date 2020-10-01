@@ -2,34 +2,59 @@
 
 void Monster::Update(float dTime)
 {
+	switch (MT)
+	{
+	case MonsterState::Idle:
+		MT = MonsterState::Roaming;
+		break;
+	case MonsterState::Roaming:
+		RoamingMove(dTime);
+		break;
+	case MonsterState::Run:
+		break;
+	case MonsterState::Attack:
+		break;
+	case MonsterState::Die:
+		DelayDie(dTime);
+		break;
+	}
+}
+
+void Monster::RoamingMove(float dTime)
+{
 	if (Hp != 0)
 	{
 		if (!_AreaManager.InAreaCheck(AreaIndex, GetPosition()))
 		{
 			_AreaManager.SearchArea(GetPosition(), AreaIndex);
 			//std::cout << "유저가 " << AreaIndex << " 번 배열로 이동" << std::endl;
-		}		
+		}
 		SetPosition(GetPosition() + GetVelocity() * (5 * dTime));
 		CollisionCheck();
 		MapRangeCheck();
-		//std::cout << GetPosition().mX << " " << GetPosition().mY << " " << GetPosition().mZ << " " << std::endl;
+	}
+}
+
+void Monster::PlayerAttack(float dTime)
+{
+
+}
+
+void Monster::DelayDie(float dTime)
+{
+	if (respawnTime <= cntRespawnTime)
+	{
+		std::cout << "몬스터 재 생성 " << cntRespawnTime << std::endl;
+		cntRespawnTime = 0;
+		Vector3 Pos;
+		Pos.Set(RandomSet(-50, 50), -1, RandomSet(-50, 50));
+		SetPosition(Pos);
+		SetDie(false);
+		Hp = 100;
 	}
 	else
 	{
-		if (respawnTime <= cntRespawnTime)
-		{
-			std::cout << "몬스터 재 생성 " <<cntRespawnTime << std::endl;
-			cntRespawnTime = 0;
-			Vector3 Pos;
-			Pos.Set(RandomSet(-50, 50), -1, RandomSet(-50, 50));
-			SetPosition(Pos);
-			SetDie(false);
-			Hp = 100;
-		}
-		else
-		{
-			cntRespawnTime += dTime;
-		}
+		cntRespawnTime += dTime;
 	}
 }
 
@@ -81,6 +106,7 @@ void Monster::CalcDamage(float Damage)
 	else if (Hp <= 0.f)
 	{
 		Hp = 0;
+		MT = MonsterState::Die;
 		SetDie(true);
 	}
 }

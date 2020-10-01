@@ -15,13 +15,6 @@ ScriptsOnlyBuild:
     - PlayerManager
     - RobbyUI
     - UIManager
-    - UnityStandardAssets.ImageEffects.Antialiasing
-    - UnityStandardAssets.ImageEffects.Bloom
-    - UnityStandardAssets.ImageEffects.ColorCorrectionCurves
-    - UnityStandardAssets.ImageEffects.DepthOfField
-    - UnityStandardAssets.ImageEffects.GlobalFog
-    - UnityStandardAssets.ImageEffects.SunShafts
-    - UnityStandardAssets.ImageEffects.VignetteAndChromaticAberration
     Unity.CollabProxy.Editor.dll:
     - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
     - Unity.Cloud.Collaborate.UserInterface.WindowCache
@@ -112,6 +105,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
+    - Class: 90
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -131,25 +126,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12392}
     - Class: 114
-      Script: {instanceID: 12404}
-    - Class: 114
-      Script: {instanceID: 12428}
-    - Class: 114
-      Script: {instanceID: 12526}
-    - Class: 114
       Script: {instanceID: 12760}
-    - Class: 114
-      Script: {instanceID: 12768}
-    - Class: 114
-      Script: {instanceID: 13042}
     - Class: 114
       Script: {instanceID: 13348}
     - Class: 114
       Script: {instanceID: 13698}
-    - Class: 114
-      Script: {instanceID: 13762}
-    - Class: 114
-      Script: {instanceID: 14086}
     - Class: 114
       Script: {instanceID: 14858}
     - Class: 114
@@ -159,8 +140,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15956}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 124
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
@@ -839,7 +818,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerIndirectToggle
   - hash:
       serializedVersion: 2
-      Hash: df7510a90bdb9d91b7b7a77f212a6c21
+      Hash: 40f693270f1b471f34c3b8d2628ad889
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Monster

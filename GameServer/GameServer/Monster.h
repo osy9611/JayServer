@@ -1,4 +1,14 @@
 #pragma once
+
+enum class MonsterState
+{
+	Idle,
+	Roaming,
+	Run,
+	Attack,
+	Die
+};
+
 class Monster : public GameObject
 {
 public:
@@ -17,10 +27,14 @@ public:
 	void MapRangeCheck();
 private:
 	void CollisionCheck();
+	void PlayerAttack(float dTime);
+	void RoamingMove(float dTime);
+	void DelayDie(float dTime);
 private:
+	MonsterState MT = MonsterState::Roaming;
 	float Speed;
 	float Hp = 100;
-	float Attack;
+	float Damage;
 
 	float respawnTime = 20.0;
 	float cntRespawnTime = 0;
