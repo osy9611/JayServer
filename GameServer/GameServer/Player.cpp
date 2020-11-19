@@ -14,26 +14,6 @@ void Player::Update(float dTime)
 		}
 		SetPosition(GetPosition() + GetVelocity() * (Data.Speed * dTime));
 		CollisionCheck();
-		/*if (GetPosition().mX <= -200 && vx <0)
-		{
-
-		}
-		else if (GetPosition().mX >= 200 && vx > 0)
-		{
-
-		}
-		else if (GetPosition().mZ <= -200 && vz < 0)
-		{
-
-		}
-		else if (GetPosition().mZ >= 200 && vz > 0)
-		{
-
-		}
-		else
-		{			
-			
-		}*/
 	}
 }
 
@@ -42,18 +22,6 @@ void Player::CollisionCheck()
 	MapData it = _AreaManager.GetCollisionObjects(AreaIndex);
 	for (int i = 0; i < it.colData.size(); ++i)
 	{
-		//bool colCheck = it.colData[i].CheckCollider(GetPosition(),GetVelocity());
-		//if (colCheck)
-		//{
-		//	//std::cout << "¸ÂÀ½" << std::endl;
-		//	Data.ResetSpeed();
-		//}
-		//else
-		//{
-		//	//std::cout << "¾Æ´Ô" << std::endl;
-		//	Data.SetSpeed();
-		//}
-
 		Vector3 targetPosition(it.colData[i].GetPosition().mX, 0, it.colData[i].GetPosition().mZ);
 		float targetRadius = it.colData[i].GetRadius();
 
@@ -91,6 +59,7 @@ void Player::CalcDamage(float Damage)
 
 void Player::Write(OutputMemoryStream &os)
 {
+	std::cout << Data.Name << std::endl;
 	os.Write(Data.Name);
 	os.Write(static_cast<short>(PT));
 	os.Write(GetPosition());

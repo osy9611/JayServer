@@ -62,7 +62,7 @@ void MonsterManager::CalcMonsterDamage(InputMemoryStream& is)
 			float angle = Dot(playerPos->GetVelocity(), monsterList[i]->GetPosition());
 			if (fabs(angle) <180)
 			{
-				monsterList[id]->CalcDamage(100);
+				monsterList[id]->CalcDamage(10,userName);
 			}
 		}
 	}

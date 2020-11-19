@@ -11,6 +11,8 @@ public:
 	void UpdateRead(InputMemoryStream& is);
 	void DeleteRead(InputMemoryStream& is);
 
+	Player* SearchPlayer(std::string name);
+
 	void CreateWrite(InputMemoryStream& is);
 	const short GetUserCount() const { return PlayerList.size(); }
 	std::unordered_map<std::string, Player*> PlayerList;

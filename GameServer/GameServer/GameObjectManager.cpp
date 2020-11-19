@@ -60,7 +60,10 @@ void GameObjectManager::UpdatePlayerManager(InputMemoryStream& is)
 
 void GameObjectManager::DeletePlayerManager(InputMemoryStream& is)
 {
-	playerManager->DeleteRead(is);
+	CSLOCK(m_csObjManager)
+	{
+		playerManager->DeleteRead(is);
+	}
 }
 
 void GameObjectManager::SetPlayerManager(InputMemoryStream& is)

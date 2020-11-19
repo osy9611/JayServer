@@ -13,6 +13,7 @@ void Monster::Update(float dTime)
 	case MonsterState::Run:
 		break;
 	case MonsterState::Attack:
+		Attack(dTime);
 		break;
 	case MonsterState::Die:
 		DelayDie(dTime);
@@ -35,9 +36,28 @@ void Monster::RoamingMove(float dTime)
 	}
 }
 
-void Monster::PlayerAttack(float dTime)
+void Monster::Attack(float dTime)
 {
-
+	if (_GameObjectManager.playerManager->PlayerList[targetName] == nullptr)
+	{
+		targetName = "";
+		MT = MonsterState::Roaming;
+		return;
+	}
+	else
+	{
+		Player* player = _GameObjectManager.playerManager->PlayerList[targetName];
+		Vector3 pos = GetPosition() - player->GetPosition();
+		float distance = pos.Length();
+		if (distance < 10.0f)
+		{
+			//std::cout << targetName << " 과 가깝다 거리 : " << distance << std::endl;
+		}
+		else
+		{
+			//std::cout << targetName << " 과 멀다 거리 : " << distance << std::endl;
+		}
+	}
 }
 
 void Monster::DelayDie(float dTime)
@@ -96,11 +116,21 @@ void Monster::CollisionCheck()
 	}
 }
 
-void Monster::CalcDamage(float Damage)
+void Monster::CalcDamage(float Damage, std::string _targetName)
 {
+	Hp -= Damage;
 	if (Hp > 0)
 	{
-		Hp -= Damage;
+		if (targetName == "")
+		{
+			targetName = _targetName;
+		}
+
+		if (MT != MonsterState::Attack)
+		{
+			MT = MonsterState::Attack;
+		}
+
 		std::cout <<"아이디 : " <<GetNetworkId() << " 체력 : " <<Hp << std::endl;
 	}
 	else if (Hp <= 0.f)

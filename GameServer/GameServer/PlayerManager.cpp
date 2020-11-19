@@ -14,25 +14,32 @@ void PlayerManager::Write(OutputMemoryStream& os)
 {
 	short playerCount = GetUserCount() + OutPlayerList.size();
 	os.Write(playerCount);
-	if (playerCount != 0)
+	if (GetUserCount() == 1 && OutPlayerList.size() == 1)
 	{
-		for (auto i = PlayerList.begin(); i != PlayerList.end(); ++i)
-		{
-			i->second->Write(os);
-		}
+		return;
 	}
-	
-	if (OutPlayerList.size() != 0)
+	else
 	{
-		short type = USER_OUT;
-		std::string _name;
-		for (int i = 0; i < OutPlayerList.size(); ++i)
+		if (playerCount != 0)
 		{
-			_name = OutPlayerList.front();
-			std::cout << _name << std::endl;
-			os.Write(_name);
-			os.Write(type);
-			OutPlayerList.pop_front();
+			for (auto i = PlayerList.begin(); i != PlayerList.end(); ++i)
+			{
+				i->second->Write(os);
+			}
+		}
+
+		if (OutPlayerList.size() != 0)
+		{
+			short type = USER_OUT;
+			std::string _name;
+			for (int i = 0; i < OutPlayerList.size(); ++i)
+			{
+				_name = OutPlayerList.front();
+				std::cout << _name << std::endl;
+				os.Write(_name);
+				os.Write(type);
+				OutPlayerList.pop_front();
+			}
 		}
 	}
 }
@@ -97,4 +104,9 @@ void PlayerManager::DeleteRead(InputMemoryStream& is)
 		PlayerList.erase(_name);
 		std::cout << _name << " 접속종료" << std::endl;		
 	}
+}
+
+Player* PlayerManager :: SearchPlayer(std::string name)
+{
+	return PlayerList[name];
 }

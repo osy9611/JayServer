@@ -24,6 +24,8 @@ private:
 
 	float dTime = 0;
 	float SendTime = 0;
+
+	CriticalSection m_csObjManager;
 };
 
 #define _GameObjectManager GameObjectManager::Singleton()

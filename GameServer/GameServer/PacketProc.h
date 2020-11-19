@@ -12,6 +12,8 @@ public:
 	//void AddQueue(InputMemoryStream data);
 	void CheckPacket(InputMemoryStream& inInputStream,int nSessionID);
 	void CheckPacket(InputMemoryStream& inInputStream);
+
+	CriticalSection m_csPacketObj;
 };
 
 #define _PacketProc PacketProc::Singleton()

@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
             {
                 obj.GetComponent<Player>().isPlayer = true;
                 camera.transform.parent = obj.transform;
-                camera.transform.localPosition = new Vector3(0, 12.91f, -2.02f);
+                camera.transform.localPosition = new Vector3(0, camera.transform.position.y, -2.02f);
             }
 
             obj.GetComponent<Player>().SetName(_setName);
