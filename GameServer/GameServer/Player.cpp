@@ -54,7 +54,7 @@ void Player::CollisionCheck()
 
 void Player::CalcDamage(float Damage)
 {
-
+	std::cout << "공격 당하는 중!!" << std::endl;
 }
 
 void Player::Write(OutputMemoryStream &os)

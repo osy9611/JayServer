@@ -30,6 +30,7 @@ public:
 private:
 	void CollisionCheck();
 	void Attack(float dTime);
+	void ChaseTarget(float dTime);
 	void RoamingMove(float dTime);
 	void DelayDie(float dTime);
 private:
@@ -38,8 +39,11 @@ private:
 
 	float Speed;
 	float Hp = 100;
-	float Damage;
-	
+
+	//몬스터 공격관련
+	float Damage = 10;
+	float AttackSpeed = 1.0f;
+	float AttackDelayCount = 0;
 	//부활 시간
 	float respawnTime = 20.0;
 	float cntRespawnTime = 0;

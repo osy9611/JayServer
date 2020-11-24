@@ -49,13 +49,22 @@ void Monster::Attack(float dTime)
 		Player* player = _GameObjectManager.playerManager->PlayerList[targetName];
 		Vector3 pos = GetPosition() - player->GetPosition();
 		float distance = pos.Length();
-		if (distance < 10.0f)
+		if (distance < 3.0f)
 		{
-			//std::cout << targetName << " 과 가깝다 거리 : " << distance << std::endl;
+			if (AttackDelayCount < AttackSpeed)
+			{
+				AttackDelayCount += dTime;
+			}
+			else
+			{
+				player->CalcDamage(Damage);
+				AttackDelayCount = 0;
+			}
+			
 		}
 		else
 		{
-			//std::cout << targetName << " 과 멀다 거리 : " << distance << std::endl;
+			SetPosition(Lerp(GetPosition(), player->GetPosition(), dTime*5));
 		}
 	}
 }
