@@ -29,7 +29,7 @@ private:
 				   SERVER=localhost;\
 				   DATABASE=iocpserver;\
 				   USER=root;\
-				   PASSWORD=@ppgk38629;";
+				   PASSWORD=1111;";
 };
 
 #define _DBManager DBManager::Singleton()
