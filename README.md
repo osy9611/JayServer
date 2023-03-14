@@ -27,3 +27,7 @@ IOCP를 이용한 게임서버
     + Server로 패킷을 보내기위한 직렬화 / 역직렬화를 하는 MemoryStream 구현
     + Player가 일정 시간이 지난 후 방향을 체크해 다른 방향일 경우 서버에 이동 패킷을 보내도록 구현
     + 서버에서 들어온 캐릭터 방향과 위치를 예측해 이동 위치를 계산하도록 구현
+    
++ 서버 구조
+  ![image](https://user-images.githubusercontent.com/55786364/224944353-5961a408-217a-40c1-ba62-766c04a761ea.png)
+
